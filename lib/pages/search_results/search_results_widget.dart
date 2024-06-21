@@ -94,10 +94,12 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                     ),
                     child: FutureBuilder<List<ProductsRow>>(
                       future: ProductsTable().queryRows(
-                        queryFn: (q) => q.eq(
-                          'name',
-                          widget.search,
-                        ),
+                        queryFn: (q) => q
+                            .eq(
+                              'name',
+                              widget.search,
+                            )
+                            .order('name'),
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
@@ -131,8 +133,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                if ((listViewProductsRow.quanty! >= 1) &&
-                                    (listViewProductsRow.quanty! > 1)) {
+                                if (listViewProductsRow.quanty! >= 1) {
                                   context.pushNamed(
                                     'product',
                                     queryParameters: {
@@ -214,7 +215,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                           Text(
                                             valueOrDefault<String>(
                                               listViewProductsRow.category,
-                                              'null',
+                                              '0',
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .labelSmall
@@ -226,7 +227,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                           Text(
                                             valueOrDefault<String>(
                                               listViewProductsRow.name,
-                                              'null',
+                                              '0',
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyLarge
@@ -236,6 +237,57 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
+                                          if (listViewProductsRow.quanty! <= 0)
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 10.0, 0.0, 0.0),
+                                              child: Container(
+                                                width: 92.0,
+                                                height: 22.0,
+                                                decoration: BoxDecoration(
+                                                  color: Color(0xFFF60808),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      blurRadius: 4.0,
+                                                      color: Color(0x33000000),
+                                                      offset: Offset(
+                                                        0.0,
+                                                        2.0,
+                                                      ),
+                                                    )
+                                                  ],
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    bottomLeft:
+                                                        Radius.circular(5.0),
+                                                    bottomRight:
+                                                        Radius.circular(5.0),
+                                                    topLeft:
+                                                        Radius.circular(5.0),
+                                                    topRight:
+                                                        Radius.circular(5.0),
+                                                  ),
+                                                ),
+                                                child: Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Text(
+                                                    'AGOTADO',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: Colors.white,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                         ],
                                       ),
                                     ),

@@ -19,6 +19,7 @@ class ProductsGroup {
   static CreateAProductCall createAProductCall = CreateAProductCall();
   static UpdateAProductCall updateAProductCall = UpdateAProductCall();
   static DeleteAProductCall deleteAProductCall = DeleteAProductCall();
+  static FiltringsearchCall filtringsearchCall = FiltringsearchCall();
 }
 
 class ListAllProductsCall {
@@ -248,6 +249,54 @@ class DeleteAProductCall {
       alwaysAllowBody: false,
     );
   }
+}
+
+class FiltringsearchCall {
+  Future<ApiCallResponse> call({
+    String? search = '',
+  }) async {
+    final baseUrl = ProductsGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'filtringsearch',
+      apiUrl: '${baseUrl}/rest/v1/Products?name=ilike.*${search}*&select=*',
+      callType: ApiCallType.GET,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppa3NncWlzcXFrc3BidnFyZ2drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg4MTI1MjEsImV4cCI6MjAyNDM4ODUyMX0.aEZXDX2arf49-Rll7sBizxekGXGRePMu17H8SIeEoww',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppa3NncWlzcXFrc3BidnFyZ2drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg4MTI1MjEsImV4cCI6MjAyNDM4ODUyMX0.aEZXDX2arf49-Rll7sBizxekGXGRePMu17H8SIeEoww',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? name(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].name''',
+      ));
+  int? price(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].price''',
+      ));
+  String? category(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].category''',
+      ));
+  String? photourl(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].photo_url''',
+      ));
+  int? quanty(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].quanty''',
+      ));
 }
 
 /// End Products Group Code
