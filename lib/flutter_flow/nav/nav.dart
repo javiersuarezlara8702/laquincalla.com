@@ -143,14 +143,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'checkout',
-          path: '/checkout',
-          builder: (context, params) => NavBarPage(
-            initialPage: '',
-            page: CheckoutWidget(),
-          ),
-        ),
-        FFRoute(
           name: 'success',
           path: '/success',
           builder: (context, params) => SuccessWidget(),
@@ -180,11 +172,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             initialPage: '',
             page: EditProfileWidget(),
           ),
-        ),
-        FFRoute(
-          name: 'homeCopy',
-          path: '/homeCopy',
-          builder: (context, params) => HomeCopyWidget(),
         ),
         FFRoute(
           name: 'category',
@@ -247,14 +234,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CheckpionWidget(),
         ),
         FFRoute(
-          name: 'checkoutCopy',
-          path: '/checkoutCopy',
-          builder: (context, params) => NavBarPage(
-            initialPage: '',
-            page: CheckoutCopyWidget(),
-          ),
-        ),
-        FFRoute(
           name: 'welcomepage',
           path: '/welcomepage',
           builder: (context, params) => WelcomepageWidget(),
@@ -273,6 +252,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ForgotPassword01',
           path: '/forgotPassword01',
           builder: (context, params) => ForgotPassword01Widget(),
+        ),
+        FFRoute(
+          name: 'productCopy',
+          path: '/productCopy',
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: ProductCopyWidget(
+              product: params.getParam(
+                'product',
+                ParamType.JSON,
+              ),
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

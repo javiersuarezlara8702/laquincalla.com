@@ -59,7 +59,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               size: 30.0,
             ),
             onPressed: () async {
-              context.pushNamed('homeCopy');
+              context.pushNamed('homeCopyCopy');
             },
           ),
           title: Text(

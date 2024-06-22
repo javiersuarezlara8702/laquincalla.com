@@ -94,7 +94,7 @@ String? returnShippingPrice(String municipio) {
       return "550";
     case "Playa ( cercania hata 70)":
       return "650";
-    case "Playa Lejania":
+    case "Playa Lejania(siboney, atabey, club habana)":
       return "950";
     case "Playa (Santa Fe, Jaimanitas)":
       return "1200";

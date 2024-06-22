@@ -14,26 +14,24 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'product_model.dart';
-export 'product_model.dart';
+import 'product_copy_model.dart';
+export 'product_copy_model.dart';
 
-class ProductWidget extends StatefulWidget {
-  const ProductWidget({
+class ProductCopyWidget extends StatefulWidget {
+  const ProductCopyWidget({
     super.key,
     required this.product,
-    required this.quanty,
   });
 
-  final ProductsRow? product;
-  final int? quanty;
+  final dynamic product;
 
   @override
-  State<ProductWidget> createState() => _ProductWidgetState();
+  State<ProductCopyWidget> createState() => _ProductCopyWidgetState();
 }
 
-class _ProductWidgetState extends State<ProductWidget>
+class _ProductCopyWidgetState extends State<ProductCopyWidget>
     with TickerProviderStateMixin {
-  late ProductModel _model;
+  late ProductCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -42,7 +40,7 @@ class _ProductWidgetState extends State<ProductWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProductModel());
+    _model = createModel(context, () => ProductCopyModel());
 
     animationsMap.addAll({
       'rowOnPageLoadAnimation': AnimationInfo(
@@ -124,10 +122,10 @@ class _ProductWidgetState extends State<ProductWidget>
           ),
         ),
         title: Text(
-          valueOrDefault<String>(
-            widget.product?.name,
-            'null',
-          ),
+          getJsonField(
+            widget.product,
+            r'''$.name''',
+          ).toString(),
           style: FlutterFlowTheme.of(context).headlineMedium.override(
                 fontFamily: 'Outfit',
                 letterSpacing: 0.0,
@@ -189,7 +187,10 @@ class _ProductWidgetState extends State<ProductWidget>
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(0.0),
                         child: Image.network(
-                          widget.product!.photoUrl!,
+                          getJsonField(
+                            widget.product,
+                            r'''$.photo_url''',
+                          ).toString(),
                           width: double.infinity,
                           height: 334.0,
                           fit: BoxFit.cover,
@@ -204,7 +205,10 @@ class _ProductWidgetState extends State<ProductWidget>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'CUP ${widget.product?.price?.toString()}',
+                            'CUP ${getJsonField(
+                              widget.product,
+                              r'''$.price''',
+                            ).toString()}',
                             textAlign: TextAlign.start,
                             style: FlutterFlowTheme.of(context)
                                 .headlineSmall
@@ -256,13 +260,27 @@ class _ProductWidgetState extends State<ProductWidget>
                               updateCount: (count) async {
                                 setState(
                                     () => _model.countControllerValue = count);
-                                if ((widget.product!.quanty! > 0) &&
-                                    (widget.quanty != null)) {
+                                if ((getJsonField(
+                                          widget.product,
+                                          r'''$.quanty''',
+                                        ) !=
+                                        null) &&
+                                    (getJsonField(
+                                          widget.product,
+                                          r'''$.quanty''',
+                                        ) !=
+                                        null)) {
                                   if (_model.countControllerValue! >
-                                      widget.quanty!) {
+                                      getJsonField(
+                                        widget.product,
+                                        r'''$.quanty''',
+                                      )) {
                                     setState(() {
                                       _model.countControllerValue =
-                                          widget.quanty!;
+                                          getJsonField(
+                                        widget.product,
+                                        r'''$.quanty''',
+                                      );
                                     });
                                     return;
                                   } else {
@@ -287,10 +305,10 @@ class _ProductWidgetState extends State<ProductWidget>
                           padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 0.0, 0.0),
                           child: AutoSizeText(
-                            valueOrDefault<String>(
-                              widget.product?.name,
-                              'null',
-                            ),
+                            getJsonField(
+                              widget.product,
+                              r'''$.name''',
+                            ).toString(),
                             style: FlutterFlowTheme.of(context)
                                 .headlineSmall
                                 .override(
@@ -308,7 +326,10 @@ class _ProductWidgetState extends State<ProductWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 25.0, 0.0),
                         child: Text(
-                          'Quedan ${widget.product?.quanty?.toString()}',
+                          'Quedan ${getJsonField(
+                            widget.product,
+                            r'''$.quanty''',
+                          ).toString()}',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
@@ -321,10 +342,10 @@ class _ProductWidgetState extends State<ProductWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 0.0, 10.0),
                       child: Text(
-                        valueOrDefault<String>(
-                          widget.product?.description,
-                          'null',
-                        ),
+                        getJsonField(
+                          widget.product,
+                          r'''$.description''',
+                        ).toString(),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
                               letterSpacing: 0.0,
@@ -392,7 +413,7 @@ class _ProductWidgetState extends State<ProductWidget>
                                               ParamType.SupabaseRow,
                                             ),
                                             'quanty': serializeParam(
-                                              widget.quanty,
+                                              listViewProductsRow.quanty,
                                               ParamType.int,
                                             ),
                                           }.withoutNulls,
@@ -567,15 +588,33 @@ class _ProductWidgetState extends State<ProductWidget>
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
-                          FFAppState().addToLineItems(functions.returnLineItem(
-                              widget.product!.id.toString(),
-                              _model.countControllerValue!,
-                              widget.product!.price!,
-                              widget.product!.photoUrl!,
-                              widget.product!.name!));
+                          FFAppState().addToLineItems(getJsonField(
+                            functions.returnLineItem(
+                                getJsonField(
+                                  widget.product,
+                                  r'''$.id''',
+                                ).toString(),
+                                _model.countControllerValue!,
+                                getJsonField(
+                                  widget.product,
+                                  r'''$.price''',
+                                ),
+                                getJsonField(
+                                  widget.product,
+                                  r'''$.photo_url''',
+                                ).toString(),
+                                getJsonField(
+                                  widget.product,
+                                  r'''$.name''',
+                                ).toString()),
+                            r'''$''',
+                          ));
                           FFAppState().basePrice = FFAppState().basePrice +
                               functions.increaseBasePrice(
-                                  widget.product!.price!.toString(),
+                                  getJsonField(
+                                    widget.product,
+                                    r'''$.price''',
+                                  ).toString(),
                                   _model.countControllerValue!.toString())!;
                           setState(() {});
                           if (!((FFAppState().lineItems.isNotEmpty) != null)) {

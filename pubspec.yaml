@@ -32,7 +32,6 @@ dependencies:
   cached_network_image: 3.3.1
   collection: 1.18.0
   dropdown_button2: 2.3.9
-  easy_debounce: 2.0.1
   equatable: 2.0.5
   file_picker: 6.1.1
   flutter_animate: 4.1.1+1
@@ -119,12 +118,13 @@ dev_dependencies:
 
 
 flutter_launcher_icons:
-  android: true
+  android: 'launcher_icon'
   ios: true
-  remove_alpha_ios: true
   web:
     generate: true
   image_path: 'assets/images/app_launcher_icon.webp'
+  adaptive_icon_background: '#00000000'
+  adaptive_icon_foreground: 'assets/images/adaptive_foreground_icon.webp'
 
 
 # For information on the generic Dart part of this file, see the

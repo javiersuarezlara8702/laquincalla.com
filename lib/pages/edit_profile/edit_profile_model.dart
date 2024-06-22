@@ -13,9 +13,13 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for name widget.
-  FocusNode? nameFocusNode;
-  TextEditingController? nameTextController;
-  String? Function(BuildContext, String?)? nameTextControllerValidator;
+  FocusNode? nameFocusNode1;
+  TextEditingController? nameTextController1;
+  String? Function(BuildContext, String?)? nameTextController1Validator;
+  // State field(s) for name widget.
+  FocusNode? nameFocusNode2;
+  TextEditingController? nameTextController2;
+  String? Function(BuildContext, String?)? nameTextController2Validator;
   // State field(s) for address widget.
   FocusNode? addressFocusNode;
   TextEditingController? addressTextController;
@@ -31,8 +35,11 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    nameFocusNode?.dispose();
-    nameTextController?.dispose();
+    nameFocusNode1?.dispose();
+    nameTextController1?.dispose();
+
+    nameFocusNode2?.dispose();
+    nameTextController2?.dispose();
 
     addressFocusNode?.dispose();
     addressTextController?.dispose();

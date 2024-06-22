@@ -1,8 +1,9 @@
-import '/backend/supabase/supabase.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -92,15 +93,13 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    child: FutureBuilder<List<ProductsRow>>(
-                      future: ProductsTable().queryRows(
-                        queryFn: (q) => q
-                            .eq(
-                              'name',
-                              widget.search,
-                            )
-                            .order('name'),
-                      ),
+                    child: FutureBuilder<ApiCallResponse>(
+                      future: (_model.apiRequestCompleter ??= Completer<
+                              ApiCallResponse>()
+                            ..complete(ProductsGroup.filtringsearchCall.call(
+                              search: widget.search,
+                            )))
+                          .future,
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
                         if (!snapshot.hasData) {
@@ -116,199 +115,248 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                             ),
                           );
                         }
-                        List<ProductsRow> listViewProductsRowList =
-                            snapshot.data!;
-                        return ListView.separated(
-                          padding: EdgeInsets.zero,
-                          primary: false,
-                          scrollDirection: Axis.vertical,
-                          itemCount: listViewProductsRowList.length,
-                          separatorBuilder: (_, __) => SizedBox(height: 10.0),
-                          itemBuilder: (context, listViewIndex) {
-                            final listViewProductsRow =
-                                listViewProductsRowList[listViewIndex];
-                            return InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                if (listViewProductsRow.quanty! >= 1) {
-                                  context.pushNamed(
-                                    'product',
-                                    queryParameters: {
-                                      'product': serializeParam(
-                                        listViewProductsRow,
-                                        ParamType.SupabaseRow,
-                                      ),
-                                      'quanty': serializeParam(
-                                        listViewProductsRow.quanty,
-                                        ParamType.int,
-                                      ),
-                                    }.withoutNulls,
-                                  );
-
-                                  return;
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Producto agotado',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .secondary,
-                                    ),
-                                  );
-                                  return;
-                                }
+                        final listViewFiltringsearchResponse = snapshot.data!;
+                        return Builder(
+                          builder: (context) {
+                            final searchitems = getJsonField(
+                              listViewFiltringsearchResponse.jsonBody,
+                              r'''$''',
+                            ).toList();
+                            return RefreshIndicator(
+                              onRefresh: () async {
+                                setState(
+                                    () => _model.apiRequestCompleter = null);
+                                await _model.waitForApiRequestCompleted();
                               },
-                              child: Container(
-                                width: double.infinity,
-                                height: 115.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 4.0,
-                                      color: Color(0x33000000),
-                                      offset: Offset(
-                                        0.0,
-                                        2.0,
-                                      ),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Hero(
-                                      tag: listViewProductsRow.photoUrl!,
-                                      transitionOnUserGestures: true,
-                                      child: ClipRRect(
+                              child: ListView.separated(
+                                padding: EdgeInsets.zero,
+                                primary: false,
+                                scrollDirection: Axis.vertical,
+                                itemCount: searchitems.length,
+                                separatorBuilder: (_, __) =>
+                                    SizedBox(height: 10.0),
+                                itemBuilder: (context, searchitemsIndex) {
+                                  final searchitemsItem =
+                                      searchitems[searchitemsIndex];
+                                  return InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      if ('${getJsonField(
+                                            searchitemsItem,
+                                            r'''$.quanty''',
+                                          ).toString()}' !=
+                                          '0') {
+                                        context.pushNamed(
+                                          'productCopy',
+                                          queryParameters: {
+                                            'product': serializeParam(
+                                              getJsonField(
+                                                searchitemsItem,
+                                                r'''$''',
+                                              ),
+                                              ParamType.JSON,
+                                            ),
+                                          }.withoutNulls,
+                                        );
+
+                                        return;
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Producto agotado',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                        );
+                                        return;
+                                      }
+                                    },
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 115.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 4.0,
+                                            color: Color(0x33000000),
+                                            offset: Offset(
+                                              0.0,
+                                              2.0,
+                                            ),
+                                          )
+                                        ],
                                         borderRadius:
                                             BorderRadius.circular(8.0),
-                                        child: Image.network(
-                                          listViewProductsRow.photoUrl!,
-                                          width: 100.0,
-                                          height: 100.0,
-                                          fit: BoxFit.cover,
-                                        ),
                                       ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
+                                      child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            valueOrDefault<String>(
-                                              listViewProductsRow.category,
-                                              '0',
+                                          Hero(
+                                            tag: getJsonField(
+                                              searchitemsItem,
+                                              r'''$.photo_url''',
+                                            ).toString(),
+                                            transitionOnUserGestures: true,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.network(
+                                                getJsonField(
+                                                  searchitemsItem,
+                                                  r'''$.photo_url''',
+                                                ).toString(),
+                                                width: 100.0,
+                                                height: 100.0,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelSmall
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  letterSpacing: 0.0,
+                                          ),
+                                          Expanded(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  getJsonField(
+                                                    searchitemsItem,
+                                                    r'''$.category''',
+                                                  ).toString(),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .labelSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                                 ),
+                                                Text(
+                                                  getJsonField(
+                                                    searchitemsItem,
+                                                    r'''$.name''',
+                                                  ).toString(),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        fontSize: 12.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                ),
+                                                if ('${getJsonField(
+                                                      searchitemsItem,
+                                                      r'''$.quanty''',
+                                                    ).toString()}' ==
+                                                    '0')
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 10.0,
+                                                                0.0, 0.0),
+                                                    child: Container(
+                                                      width: 92.0,
+                                                      height: 22.0,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            Color(0xFFF60808),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            blurRadius: 4.0,
+                                                            color: Color(
+                                                                0x33000000),
+                                                            offset: Offset(
+                                                              0.0,
+                                                              2.0,
+                                                            ),
+                                                          )
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  5.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  5.0),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  5.0),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  5.0),
+                                                        ),
+                                                      ),
+                                                      child: Align(
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                0.0, 0.0),
+                                                        child: Text(
+                                                          'AGOTADO',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                color: Colors
+                                                                    .white,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                              ],
+                                            ),
                                           ),
                                           Text(
-                                            valueOrDefault<String>(
-                                              listViewProductsRow.name,
-                                              '0',
-                                            ),
+                                            'CUP ${getJsonField(
+                                              searchitemsItem,
+                                              r'''$.price''',
+                                            ).toString()}',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyLarge
                                                 .override(
                                                   fontFamily: 'Readex Pro',
-                                                  fontSize: 12.0,
                                                   letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w600,
                                                 ),
                                           ),
-                                          if (listViewProductsRow.quanty! <= 0)
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 10.0, 0.0, 0.0),
-                                              child: Container(
-                                                width: 92.0,
-                                                height: 22.0,
-                                                decoration: BoxDecoration(
-                                                  color: Color(0xFFF60808),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      blurRadius: 4.0,
-                                                      color: Color(0x33000000),
-                                                      offset: Offset(
-                                                        0.0,
-                                                        2.0,
-                                                      ),
-                                                    )
-                                                  ],
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(5.0),
-                                                    bottomRight:
-                                                        Radius.circular(5.0),
-                                                    topLeft:
-                                                        Radius.circular(5.0),
-                                                    topRight:
-                                                        Radius.circular(5.0),
-                                                  ),
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: Text(
-                                                    'AGOTADO',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          color: Colors.white,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                        ],
+                                          Icon(
+                                            Icons.keyboard_arrow_right,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondary,
+                                            size: 24.0,
+                                          ),
+                                        ].divide(SizedBox(width: 5.0)),
                                       ),
                                     ),
-                                    Text(
-                                      'CUP ${listViewProductsRow.price?.toString()}',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyLarge
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                    Icon(
-                                      Icons.keyboard_arrow_right,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondary,
-                                      size: 24.0,
-                                    ),
-                                  ].divide(SizedBox(width: 5.0)),
-                                ),
+                                  );
+                                },
                               ),
                             );
                           },
