@@ -49,4 +49,7 @@ class OrderRow extends SupabaseDataRow {
 
   String? get userId => getField<String>('user_id');
   set userId(String? value) => setField<String>('user_id', value);
+
+  String? get orderNote => getField<String>('order_note');
+  set orderNote(String? value) => setField<String>('order_note', value);
 }
