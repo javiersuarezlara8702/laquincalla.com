@@ -1,4 +1,4 @@
-package com.mycompany.laesquina
+package com.laquincalla.com
 
 import io.flutter.embedding.android.FlutterActivity
 

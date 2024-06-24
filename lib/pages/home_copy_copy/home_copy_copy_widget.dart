@@ -667,13 +667,7 @@ class _HomeCopyCopyWidgetState extends State<HomeCopyCopyWidget> {
                                                                     0.0,
                                                                     5.0),
                                                         child: Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            gridViewProductsRow
-                                                                .quanty
-                                                                ?.toString(),
-                                                            'null',
-                                                          ),
+                                                          '${gridViewProductsRow.price?.toString()}CUP',
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium
