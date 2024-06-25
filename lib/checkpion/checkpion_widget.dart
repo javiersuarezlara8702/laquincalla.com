@@ -879,7 +879,7 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                 await OrdersGroup.createAnOrderCall.call(
                                   status: 'in process',
                                   lineItemsJson: FFAppState().lineItems,
-                                  address1: _model.textController5.text,
+                                  address1: _model.textController3.text,
                                   phone: _model.textController4.text,
                                   firstName: _model.textController1.text,
                                   lastName: _model.textController2.text,
@@ -897,10 +897,12 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                 FFAppState().lastName =
                                     _model.textController2.text;
                                 FFAppState().address =
-                                    _model.textController5.text;
+                                    _model.textController3.text;
                                 FFAppState().phone =
                                     _model.textController4.text;
                                 FFAppState().zone = _model.dropDownValue!;
+                                setState(() {});
+                                FFAppState().lineItems = [];
                                 setState(() {});
 
                                 context.pushNamed('success');

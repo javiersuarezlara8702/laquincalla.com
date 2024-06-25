@@ -123,17 +123,9 @@ class _SuccessWidgetState extends State<SuccessWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 44.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed(
-                        'homeCopyCopy',
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.leftToRight,
-                          ),
-                        },
-                      );
+                      context.pushNamed('orders');
                     },
-                    text: 'Ir al inicio',
+                    text: 'Ir a Ordenes',
                     options: FFButtonOptions(
                       width: 130.0,
                       height: 50.0,
