@@ -1,3 +1,5 @@
+import '/auth/supabase_auth/auth_util.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -28,6 +30,8 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   FocusNode? phoneFocusNode;
   TextEditingController? phoneTextController;
   String? Function(BuildContext, String?)? phoneTextControllerValidator;
+  // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
+  List<UserRow>? returnmatching1;
 
   @override
   void initState(BuildContext context) {}

@@ -12,32 +12,32 @@ class CreateAccountModel extends FlutterFlowModel<CreateAccountWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for password widget.
-  FocusNode? passwordFocusNode1;
-  TextEditingController? passwordTextController1;
-  String? Function(BuildContext, String?)? passwordTextController1Validator;
+  // State field(s) for Nombre widget.
+  FocusNode? nombreFocusNode;
+  TextEditingController? nombreTextController;
+  String? Function(BuildContext, String?)? nombreTextControllerValidator;
   // State field(s) for emailAddress widget.
   FocusNode? emailAddressFocusNode;
   TextEditingController? emailAddressTextController;
   String? Function(BuildContext, String?)? emailAddressTextControllerValidator;
   // State field(s) for password widget.
-  FocusNode? passwordFocusNode2;
-  TextEditingController? passwordTextController2;
+  FocusNode? passwordFocusNode;
+  TextEditingController? passwordTextController;
   late bool passwordVisibility;
-  String? Function(BuildContext, String?)? passwordTextController2Validator;
+  String? Function(BuildContext, String?)? passwordTextControllerValidator;
   // State field(s) for confirmpass widget.
   FocusNode? confirmpassFocusNode;
   TextEditingController? confirmpassTextController;
   late bool confirmpassVisibility;
   String? Function(BuildContext, String?)? confirmpassTextControllerValidator;
-  // State field(s) for password widget.
-  FocusNode? passwordFocusNode3;
-  TextEditingController? passwordTextController3;
-  String? Function(BuildContext, String?)? passwordTextController3Validator;
-  // State field(s) for password widget.
-  FocusNode? passwordFocusNode4;
-  TextEditingController? passwordTextController4;
-  String? Function(BuildContext, String?)? passwordTextController4Validator;
+  // State field(s) for Telefono widget.
+  FocusNode? telefonoFocusNode;
+  TextEditingController? telefonoTextController;
+  String? Function(BuildContext, String?)? telefonoTextControllerValidator;
+  // State field(s) for Direccion widget.
+  FocusNode? direccionFocusNode;
+  TextEditingController? direccionTextController;
+  String? Function(BuildContext, String?)? direccionTextControllerValidator;
 
   @override
   void initState(BuildContext context) {
@@ -48,22 +48,22 @@ class CreateAccountModel extends FlutterFlowModel<CreateAccountWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    passwordFocusNode1?.dispose();
-    passwordTextController1?.dispose();
+    nombreFocusNode?.dispose();
+    nombreTextController?.dispose();
 
     emailAddressFocusNode?.dispose();
     emailAddressTextController?.dispose();
 
-    passwordFocusNode2?.dispose();
-    passwordTextController2?.dispose();
+    passwordFocusNode?.dispose();
+    passwordTextController?.dispose();
 
     confirmpassFocusNode?.dispose();
     confirmpassTextController?.dispose();
 
-    passwordFocusNode3?.dispose();
-    passwordTextController3?.dispose();
+    telefonoFocusNode?.dispose();
+    telefonoTextController?.dispose();
 
-    passwordFocusNode4?.dispose();
-    passwordTextController4?.dispose();
+    direccionFocusNode?.dispose();
+    direccionTextController?.dispose();
   }
 }

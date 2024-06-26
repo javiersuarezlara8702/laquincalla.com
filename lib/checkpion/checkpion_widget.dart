@@ -71,10 +71,8 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return FutureBuilder<List<ProductsRow>>(
-      future: ProductsTable().queryRows(
-        queryFn: (q) => q,
-      ),
+    return FutureBuilder<ApiCallResponse>(
+      future: RetriveuserresponceCall.call(),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -93,7 +91,7 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
             ),
           );
         }
-        List<ProductsRow> checkpionProductsRowList = snapshot.data!;
+        final checkpionRetriveuserresponceResponse = snapshot.data!;
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -870,8 +868,32 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                           ),
                           FFButtonWidget(
                             onPressed: () async {
+                              var _shouldSetState = false;
                               if (_model.formKey.currentState == null ||
                                   !_model.formKey.currentState!.validate()) {
+                                return;
+                              }
+                              if (currentUserUid !=
+                                  getJsonField(
+                                    checkpionRetriveuserresponceResponse
+                                        .jsonBody,
+                                    r'''$[:].user_id''',
+                                  ).toString()) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'No coinciden los permisos',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).secondary,
+                                  ),
+                                );
+                                if (_shouldSetState) setState(() {});
                                 return;
                               }
                               if (_model.dropDownValue != null &&
@@ -893,6 +915,20 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                   orderNote: _model.textController5.text,
                                 );
 
+                                _model.matchupdateuser =
+                                    await UserTable().update(
+                                  data: {
+                                    'name': _model.textController1.text,
+                                    'phonenumberr': _model.textController4.text,
+                                    'derection': _model.textController3.text,
+                                  },
+                                  matchingRows: (rows) => rows.eq(
+                                    'user_id',
+                                    currentUserUid,
+                                  ),
+                                  returnRows: true,
+                                );
+                                _shouldSetState = true;
                                 FFAppState().name = _model.textController1.text;
                                 FFAppState().lastName =
                                     _model.textController2.text;
@@ -921,8 +957,11 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                         FlutterFlowTheme.of(context).secondary,
                                   ),
                                 );
+                                if (_shouldSetState) setState(() {});
                                 return;
                               }
+
+                              if (_shouldSetState) setState(() {});
                             },
                             text: 'Realizar reserva',
                             options: FFButtonOptions(

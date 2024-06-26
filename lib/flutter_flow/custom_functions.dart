@@ -140,3 +140,13 @@ String convertToString(double delivery) {
   String value = delivery.toString();
   return value;
 }
+
+double newbestprice(
+  String price,
+  String quantity,
+) {
+  double new1precio = double.parse(price);
+  int new1cantidad = int.parse(quantity);
+
+  return new1precio * new1cantidad;
+}

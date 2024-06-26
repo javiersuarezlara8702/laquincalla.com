@@ -1,3 +1,5 @@
+import '/auth/supabase_auth/auth_util.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -402,6 +404,18 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           FFAppState().lastName =
                               _model.nameTextController2.text;
                           setState(() {});
+                          _model.returnmatching1 = await UserTable().update(
+                            data: {
+                              'name': _model.nameTextController1.text,
+                              'phonenumberr': _model.phoneTextController.text,
+                              'derection': _model.addressTextController.text,
+                            },
+                            matchingRows: (rows) => rows.eq(
+                              'user_id',
+                              currentUserUid,
+                            ),
+                            returnRows: true,
+                          );
 
                           context.pushNamed('profile');
 
@@ -418,6 +432,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   FlutterFlowTheme.of(context).secondary,
                             ),
                           );
+
+                          setState(() {});
                         },
                         text: 'Guardar datos',
                         options: FFButtonOptions(

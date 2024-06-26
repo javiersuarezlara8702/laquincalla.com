@@ -48,6 +48,8 @@ class CheckpionModel extends FlutterFlowModel<CheckpionWidget> {
   FocusNode? textFieldFocusNode6;
   TextEditingController? textController6;
   String? Function(BuildContext, String?)? textController6Validator;
+  // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
+  List<UserRow>? matchupdateuser;
 
   @override
   void initState(BuildContext context) {}

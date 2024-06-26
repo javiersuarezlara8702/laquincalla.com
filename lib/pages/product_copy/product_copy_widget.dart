@@ -610,12 +610,12 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
                             r'''$''',
                           ));
                           FFAppState().basePrice = FFAppState().basePrice +
-                              functions.increaseBasePrice(
+                              functions.newbestprice(
                                   getJsonField(
                                     widget.product,
                                     r'''$.price''',
                                   ).toString(),
-                                  _model.countControllerValue!.toString())!;
+                                  _model.countControllerValue!.toString());
                           setState(() {});
                           if (!((FFAppState().lineItems.isNotEmpty) != null)) {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -649,12 +649,11 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
                             ),
                           );
                         },
-                        text: 'Añadir al carrito',
+                        text: 'Añadir Producto',
                         options: FFButtonOptions(
-                          width: 130.0,
-                          height: 50.0,
+                          height: 52.0,
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
+                              24.0, 0.0, 24.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
@@ -664,11 +663,12 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
                                     color: Colors.white,
                                     letterSpacing: 0.0,
                                   ),
-                          elevation: 2.0,
+                          elevation: 3.0,
                           borderSide: BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
                     ),
