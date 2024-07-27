@@ -83,9 +83,9 @@ String? returnShippingPrice(String municipio) {
     case "Habana Vieja":
       return "550";
     case "Santo suarez":
-      return "550";
+      return "600";
     case "Cerro":
-      return "400";
+      return "500";
     case "Marianao":
       return "750";
     case "Marianao ( desde 100 en adelante)":
@@ -95,11 +95,11 @@ String? returnShippingPrice(String municipio) {
     case "Playa ( cercania hata 70)":
       return "650";
     case "Playa Lejania(siboney, atabey, club habana)":
-      return "950";
+      return "1300";
     case "Playa (Santa Fe, Jaimanitas)":
-      return "1200";
+      return "1600";
     case "Lawton":
-      return "700";
+      return "750";
     case "Vibora":
       return "650";
     case "Sevillano":
@@ -113,9 +113,9 @@ String? returnShippingPrice(String municipio) {
     case "Managua":
       return "1600";
     case "Las Guasimas":
-      return "1350";
+      return "1500";
     case "Rep Electrico":
-      return "1350";
+      return "1500";
     case "Calvario":
       return "1000";
     case "Arrollo Naranjo ( Los Pinos, Vieja Linda, Porvenir, Mantilla)":
@@ -131,7 +131,9 @@ String? returnShippingPrice(String municipio) {
     case "Habana del este ( cercania)":
       return "900";
     case "Habana del este ( lejania)":
-      return "1200";
+      return "1400";
+    case "Recogida en el local":
+      return "0";
     default:
   }
 }

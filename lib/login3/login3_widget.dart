@@ -335,6 +335,7 @@ class _Login3WidgetState extends State<Login3Widget> {
                                     }
                                     List<UserRow> buttonUserRowList =
                                         snapshot.data!;
+
                                     return FFButtonWidget(
                                       onPressed: () async {
                                         GoRouter.of(context).prepareAuthEvent();
@@ -349,6 +350,10 @@ class _Login3WidgetState extends State<Login3Widget> {
                                         if (user == null) {
                                           return;
                                         }
+
+                                        FFAppState().emailuserid =
+                                            currentUserEmail;
+                                        setState(() {});
 
                                         context.goNamedAuth(
                                             'homeCopyCopy', context.mounted);

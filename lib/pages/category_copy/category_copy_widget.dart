@@ -72,7 +72,7 @@ class _CategoryCopyWidgetState extends State<CategoryCopyWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
             child: Text(
               valueOrDefault<String>(
-                widget.categoryname,
+                widget!.categoryname,
                 'null',
               ),
               style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -97,7 +97,7 @@ class _CategoryCopyWidgetState extends State<CategoryCopyWidget> {
                         ..complete(ProductsTable().queryRows(
                           queryFn: (q) => q.eq(
                             'category',
-                            widget.categoryname,
+                            widget!.categoryname,
                           ),
                         )))
                       .future,
@@ -117,6 +117,7 @@ class _CategoryCopyWidgetState extends State<CategoryCopyWidget> {
                   );
                 }
                 List<ProductsRow> columnProductsRowList = snapshot.data!;
+
                 return InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,

@@ -72,7 +72,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
             child: Text(
               valueOrDefault<String>(
-                widget.categoryname,
+                widget!.categoryname,
                 'null',
               ),
               style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -109,7 +109,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                   ..complete(ProductsTable().queryRows(
                                     queryFn: (q) => q.eq(
                                       'category',
-                                      widget.categoryname,
+                                      widget!.categoryname,
                                     ),
                                   )))
                             .future,
@@ -130,6 +130,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           }
                           List<ProductsRow> gridViewProductsRowList =
                               snapshot.data!;
+
                           return RefreshIndicator(
                             onRefresh: () async {
                               setState(() => _model.requestCompleter = null);

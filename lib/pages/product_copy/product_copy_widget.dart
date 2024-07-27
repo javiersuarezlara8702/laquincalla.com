@@ -123,7 +123,7 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
         ),
         title: Text(
           getJsonField(
-            widget.product,
+            widget!.product,
             r'''$.name''',
           ).toString(),
           style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -188,7 +188,7 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
                         borderRadius: BorderRadius.circular(0.0),
                         child: Image.network(
                           getJsonField(
-                            widget.product,
+                            widget!.product,
                             r'''$.photo_url''',
                           ).toString(),
                           width: double.infinity,
@@ -206,7 +206,7 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
                         children: [
                           Text(
                             'CUP ${getJsonField(
-                              widget.product,
+                              widget!.product,
                               r'''$.price''',
                             ).toString()}',
                             textAlign: TextAlign.start,
@@ -261,24 +261,24 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
                                 setState(
                                     () => _model.countControllerValue = count);
                                 if ((getJsonField(
-                                          widget.product,
+                                          widget!.product,
                                           r'''$.quanty''',
                                         ) !=
                                         null) &&
                                     (getJsonField(
-                                          widget.product,
+                                          widget!.product,
                                           r'''$.quanty''',
                                         ) !=
                                         null)) {
                                   if (_model.countControllerValue! >
                                       getJsonField(
-                                        widget.product,
+                                        widget!.product,
                                         r'''$.quanty''',
                                       )) {
                                     setState(() {
                                       _model.countControllerValue =
                                           getJsonField(
-                                        widget.product,
+                                        widget!.product,
                                         r'''$.quanty''',
                                       );
                                     });
@@ -306,7 +306,7 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
                               16.0, 0.0, 0.0, 0.0),
                           child: AutoSizeText(
                             getJsonField(
-                              widget.product,
+                              widget!.product,
                               r'''$.name''',
                             ).toString(),
                             style: FlutterFlowTheme.of(context)
@@ -327,7 +327,7 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
                             16.0, 0.0, 25.0, 0.0),
                         child: Text(
                           'Quedan ${getJsonField(
-                            widget.product,
+                            widget!.product,
                             r'''$.quanty''',
                           ).toString()}',
                           style:
@@ -343,7 +343,7 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
                           EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 0.0, 10.0),
                       child: Text(
                         getJsonField(
-                          widget.product,
+                          widget!.product,
                           r'''$.description''',
                         ).toString(),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -387,6 +387,7 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
                               }
                               List<ProductsRow> listViewProductsRowList =
                                   snapshot.data!;
+
                               return ListView.separated(
                                 padding: EdgeInsets.zero,
                                 scrollDirection: Axis.horizontal,
@@ -588,31 +589,28 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
-                          FFAppState().addToLineItems(getJsonField(
-                            functions.returnLineItem(
-                                getJsonField(
-                                  widget.product,
-                                  r'''$.id''',
-                                ).toString(),
-                                _model.countControllerValue!,
-                                getJsonField(
-                                  widget.product,
-                                  r'''$.price''',
-                                ),
-                                getJsonField(
-                                  widget.product,
-                                  r'''$.photo_url''',
-                                ).toString(),
-                                getJsonField(
-                                  widget.product,
-                                  r'''$.name''',
-                                ).toString()),
-                            r'''$''',
-                          ));
+                          FFAppState().addToLineItems(functions.returnLineItem(
+                              getJsonField(
+                                widget!.product,
+                                r'''$.id''',
+                              ).toString(),
+                              _model.countControllerValue!,
+                              getJsonField(
+                                widget!.product,
+                                r'''$.price''',
+                              ),
+                              getJsonField(
+                                widget!.product,
+                                r'''$.photo_url''',
+                              ).toString(),
+                              getJsonField(
+                                widget!.product,
+                                r'''$.name''',
+                              ).toString()));
                           FFAppState().basePrice = FFAppState().basePrice +
                               functions.newbestprice(
                                   getJsonField(
-                                    widget.product,
+                                    widget!.product,
                                     r'''$.price''',
                                   ).toString(),
                                   _model.countControllerValue!.toString());

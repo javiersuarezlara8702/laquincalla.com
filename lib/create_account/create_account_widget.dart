@@ -596,7 +596,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                         ],
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: 'Direccion del Negocio ',
+                                          labelText: 'Direccion  del negocio',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
                                                   .labelLarge
@@ -748,6 +748,9 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                                       .text;
                                                   FFAppState().phone = _model
                                                       .telefonoTextController
+                                                      .text;
+                                                  FFAppState().emailuserid = _model
+                                                      .emailAddressTextController
                                                       .text;
                                                   setState(() {});
 

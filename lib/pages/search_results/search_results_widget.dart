@@ -97,7 +97,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                       future: (_model.apiRequestCompleter ??= Completer<
                               ApiCallResponse>()
                             ..complete(ProductsGroup.filtringsearchCall.call(
-                              search: widget.search,
+                              search: widget!.search,
                             )))
                           .future,
                       builder: (context, snapshot) {
@@ -116,12 +116,14 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                           );
                         }
                         final listViewFiltringsearchResponse = snapshot.data!;
+
                         return Builder(
                           builder: (context) {
                             final searchitems = getJsonField(
                               listViewFiltringsearchResponse.jsonBody,
                               r'''$''',
                             ).toList();
+
                             return RefreshIndicator(
                               onRefresh: () async {
                                 setState(

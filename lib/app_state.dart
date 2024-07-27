@@ -41,6 +41,9 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _zone = prefs.getString('ff_zone') ?? _zone;
     });
+    _safeInit(() {
+      _emailuserid = prefs.getString('ff_emailuserid') ?? _emailuserid;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -184,6 +187,19 @@ class FFAppState extends ChangeNotifier {
   double get deliverydoble => _deliverydoble;
   set deliverydoble(double value) {
     _deliverydoble = value;
+  }
+
+  String _emailuserid = '';
+  String get emailuserid => _emailuserid;
+  set emailuserid(String value) {
+    _emailuserid = value;
+    prefs.setString('ff_emailuserid', value);
+  }
+
+  String _userid = '';
+  String get userid => _userid;
+  set userid(String value) {
+    _userid = value;
   }
 }
 

@@ -92,6 +92,7 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
           );
         }
         final checkpionRetriveuserresponceResponse = snapshot.data!;
+
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -407,6 +408,7 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                         fontFamily: 'Readex Pro',
                                         letterSpacing: 0.0,
                                       ),
+                                  keyboardType: TextInputType.number,
                                   validator: _model.textController4Validator
                                       .asValidator(context),
                                 ),
@@ -446,7 +448,8 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                     'Boyero (Parajon, Fontanar, Mazorra , Rio Verde, Calabazar, Abel Santa Maria, Wajay, Alturas del Aeropuertpo)',
                                     'La lisa',
                                     'Habana del este ( cercania)',
-                                    'Habana del este ( lejania)'
+                                    'Habana del este ( lejania)',
+                                    'Recogida en el local '
                                   ],
                                   onChanged: (val) async {
                                     setState(() => _model.dropDownValue = val);
@@ -464,14 +467,16 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                     setState(() {});
                                   },
                                   width: 333.0,
-                                  height: 53.0,
+                                  height: 64.0,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Readex Pro',
+                                        fontSize: 13.0,
                                         letterSpacing: 0.0,
                                       ),
-                                  hintText: 'Seleccione Municipio de entrega ',
+                                  hintText:
+                                      'Seleccione Municipio de entrega o Recogida en el local ',
                                   icon: Icon(
                                     Icons.keyboard_arrow_down_rounded,
                                     color: FlutterFlowTheme.of(context)
@@ -487,7 +492,7 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                   margin: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 4.0, 16.0, 4.0),
                                   hidesUnderline: true,
-                                  isOverButton: true,
+                                  isOverButton: false,
                                   isSearchable: false,
                                   isMultiSelect: false,
                                 ),
@@ -873,12 +878,99 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                   !_model.formKey.currentState!.validate()) {
                                 return;
                               }
-                              if (currentUserUid !=
-                                  getJsonField(
-                                    checkpionRetriveuserresponceResponse
-                                        .jsonBody,
-                                    r'''$[:].user_id''',
-                                  ).toString()) {
+                              if (_model.textController1.text != null &&
+                                  _model.textController1.text != '') {
+                                if (_model.textController2.text != null &&
+                                    _model.textController2.text != '') {
+                                  if (_model.textController3.text != null &&
+                                      _model.textController3.text != '') {
+                                    if (!(_model.textController4.text != null &&
+                                        _model.textController4.text != '')) {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('Campo Vacio '),
+                                            content: Text(
+                                                'Por Favor LLene el Campo con El Telefono de entrega '),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                      if (_shouldSetState) setState(() {});
+                                      return;
+                                    }
+                                  } else {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('Campo Vacio'),
+                                          content: Text(
+                                              'Por Favor LLene el Campo con la Direccion'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('Ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                    if (_shouldSetState) setState(() {});
+                                    return;
+                                  }
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('Campo Vacio '),
+                                        content: Text(
+                                            'Por Favor Llene el campo con su Apellido'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Ok'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  if (_shouldSetState) setState(() {});
+                                  return;
+                                }
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Campo Vacio'),
+                                      content: Text(
+                                          'Por Favor llene el campo con su Nombre'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                if (_shouldSetState) setState(() {});
+                                return;
+                              }
+
+                              if (currentUserUid != FFAppState().userid) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(

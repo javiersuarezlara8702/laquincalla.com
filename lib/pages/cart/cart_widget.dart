@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -115,6 +116,7 @@ class _CartWidgetState extends State<CartWidget> {
                             builder: (context) {
                               final lineItem =
                                   FFAppState().lineItems.map((e) => e).toList();
+
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 primary: false,
@@ -570,11 +572,60 @@ class _CartWidgetState extends State<CartWidget> {
                         onPressed: (FFAppState().lineItems.length == 0)
                             ? null
                             : () async {
+                                var _shouldSetState = false;
                                 FFAppState().basePricestrig =
                                     FFAppState().basePrice.toString();
                                 setState(() {});
+                                _model.userresponce =
+                                    await SerachuseridCall.call(
+                                  search: FFAppState().emailuserid,
+                                );
+
+                                _shouldSetState = true;
+                                if ((_model.userresponce?.succeeded ?? true) ==
+                                    true) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'exito',
+                                        style: TextStyle(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context).success,
+                                    ),
+                                  );
+                                  FFAppState().userid = getJsonField(
+                                    (_model.userresponce?.jsonBody ?? ''),
+                                    r'''$[:].user_id''',
+                                  ).toString();
+                                  setState(() {});
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'llamada api fallida',
+                                        style: TextStyle(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondary,
+                                    ),
+                                  );
+                                  if (_shouldSetState) setState(() {});
+                                  return;
+                                }
 
                                 context.pushNamed('checkpion');
+
+                                if (_shouldSetState) setState(() {});
                               },
                         text: 'Continuar',
                         options: FFButtonOptions(

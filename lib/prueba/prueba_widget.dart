@@ -152,7 +152,7 @@ class _PruebaWidgetState extends State<PruebaWidget> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
-                      widget.photo!,
+                      widget!.photo!,
                       width: 350.0,
                       height: 200.0,
                       fit: BoxFit.cover,
@@ -171,15 +171,16 @@ class _PruebaWidgetState extends State<PruebaWidget> {
                       },
                       matchingRows: (rows) => rows.eq(
                         'id',
-                        widget.id,
+                        widget!.id,
                       ),
                       returnRows: true,
                     );
                     _shouldSetState = true;
-                    if ((_model.uploadedphoto?.sortedList((e) => e.photoUrl!) !=
+                    if ((_model.uploadedphoto?.sortedList(
+                                    keyOf: (e) => e.photoUrl!, desc: false) !=
                                 null &&
-                            (_model.uploadedphoto
-                                    ?.sortedList((e) => e.photoUrl!))!
+                            (_model.uploadedphoto?.sortedList(
+                                    keyOf: (e) => e.photoUrl!, desc: false))!
                                 .isNotEmpty) ==
                         (_model.uploadedFileUrl != null &&
                             _model.uploadedFileUrl != '')) {

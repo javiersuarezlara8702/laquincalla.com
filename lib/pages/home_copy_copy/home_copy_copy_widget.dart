@@ -54,6 +54,25 @@ class _HomeCopyCopyWidgetState extends State<HomeCopyCopyWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () async {
+            await launchURL(
+                'https://wa.me/+5354260383?text=Necesito%20asistencia%20con%20la%20aplicacion%20de%20La%20quincalla%20.com');
+          },
+          backgroundColor: FlutterFlowTheme.of(context).primaryText,
+          icon: Icon(
+            Icons.chat,
+          ),
+          elevation: 50.0,
+          label: Text(
+            'Chat de Ayuda',
+            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  fontFamily: 'Readex Pro',
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  letterSpacing: 0.0,
+                ),
+          ),
+        ),
         drawer: Drawer(
           elevation: 16.0,
           child: Padding(
@@ -186,7 +205,7 @@ class _HomeCopyCopyWidgetState extends State<HomeCopyCopyWidget> {
                     highlightColor: Colors.transparent,
                     onTap: () async {
                       await launchURL(
-                          'https://wa.me/+5354260383?text=Necesito%20asistencia%20con%20la%20aplicacion%20de%20La%20Esquina%20Charcuteria');
+                          'https://wa.me/+5354260383?text=Necesito%20asistencia%20con%20la%20aplicacion%20de%20La%20quincalla%20.com');
                     },
                     child: Container(
                       width: double.infinity,
@@ -492,6 +511,7 @@ class _HomeCopyCopyWidgetState extends State<HomeCopyCopyWidget> {
                                   }
                                   List<ProductsRow> gridViewProductsRowList =
                                       snapshot.data!;
+
                                   return RefreshIndicator(
                                     onRefresh: () async {
                                       setState(

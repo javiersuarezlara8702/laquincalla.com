@@ -125,7 +125,7 @@ class _ProductWidgetState extends State<ProductWidget>
         ),
         title: Text(
           valueOrDefault<String>(
-            widget.product?.name,
+            widget!.product?.name,
             'null',
           ),
           style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -189,7 +189,7 @@ class _ProductWidgetState extends State<ProductWidget>
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(0.0),
                         child: Image.network(
-                          widget.product!.photoUrl!,
+                          widget!.product!.photoUrl!,
                           width: double.infinity,
                           height: 334.0,
                           fit: BoxFit.cover,
@@ -204,7 +204,7 @@ class _ProductWidgetState extends State<ProductWidget>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'CUP ${widget.product?.price?.toString()}',
+                            'CUP ${widget!.product?.price?.toString()}',
                             textAlign: TextAlign.start,
                             style: FlutterFlowTheme.of(context)
                                 .headlineSmall
@@ -256,13 +256,13 @@ class _ProductWidgetState extends State<ProductWidget>
                               updateCount: (count) async {
                                 setState(
                                     () => _model.countControllerValue = count);
-                                if ((widget.product!.quanty! > 0) &&
-                                    (widget.quanty != null)) {
+                                if ((widget!.product!.quanty! > 0) &&
+                                    (widget!.quanty != null)) {
                                   if (_model.countControllerValue! >
-                                      widget.quanty!) {
+                                      widget!.quanty!) {
                                     setState(() {
                                       _model.countControllerValue =
-                                          widget.quanty!;
+                                          widget!.quanty!;
                                     });
                                     return;
                                   } else {
@@ -288,7 +288,7 @@ class _ProductWidgetState extends State<ProductWidget>
                               16.0, 0.0, 0.0, 0.0),
                           child: AutoSizeText(
                             valueOrDefault<String>(
-                              widget.product?.name,
+                              widget!.product?.name,
                               'null',
                             ),
                             style: FlutterFlowTheme.of(context)
@@ -308,7 +308,7 @@ class _ProductWidgetState extends State<ProductWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 25.0, 0.0),
                         child: Text(
-                          'Quedan ${widget.product?.quanty?.toString()}',
+                          'Quedan ${widget!.product?.quanty?.toString()}',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
@@ -322,7 +322,7 @@ class _ProductWidgetState extends State<ProductWidget>
                           EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 0.0, 10.0),
                       child: Text(
                         valueOrDefault<String>(
-                          widget.product?.description,
+                          widget!.product?.description,
                           'null',
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -366,6 +366,7 @@ class _ProductWidgetState extends State<ProductWidget>
                               }
                               List<ProductsRow> listViewProductsRowList =
                                   snapshot.data!;
+
                               return ListView.separated(
                                 padding: EdgeInsets.zero,
                                 scrollDirection: Axis.horizontal,
@@ -392,7 +393,7 @@ class _ProductWidgetState extends State<ProductWidget>
                                               ParamType.SupabaseRow,
                                             ),
                                             'quanty': serializeParam(
-                                              widget.quanty,
+                                              widget!.quanty,
                                               ParamType.int,
                                             ),
                                           }.withoutNulls,
@@ -568,14 +569,14 @@ class _ProductWidgetState extends State<ProductWidget>
                       child: FFButtonWidget(
                         onPressed: () async {
                           FFAppState().addToLineItems(functions.returnLineItem(
-                              widget.product!.id.toString(),
+                              widget!.product!.id.toString(),
                               _model.countControllerValue!,
-                              widget.product!.price!,
-                              widget.product!.photoUrl!,
-                              widget.product!.name!));
+                              widget!.product!.price!,
+                              widget!.product!.photoUrl!,
+                              widget!.product!.name!));
                           FFAppState().basePrice = FFAppState().basePrice +
                               functions.increaseBasePrice(
-                                  widget.product!.price!.toString(),
+                                  widget!.product!.price!.toString(),
                                   _model.countControllerValue!.toString())!;
                           setState(() {});
                           if (!((FFAppState().lineItems.isNotEmpty) != null)) {

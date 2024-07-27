@@ -162,10 +162,11 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                         ),
                                         Builder(
                                           builder: (context) {
-                                            final ordersProducts = widget
+                                            final ordersProducts = widget!
                                                     .orderdetails?.lineItems
                                                     ?.toList() ??
                                                 [];
+
                                             return ListView.builder(
                                               padding: EdgeInsets.zero,
                                               primary: false,
@@ -444,7 +445,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                             ],
                                                           ),
                                                           Text(
-                                                            'CUP ${widget.orderdetails?.shippingTotal}',
+                                                            'CUP ${widget!.orderdetails?.shippingTotal}',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .titleMedium
@@ -526,7 +527,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                             ],
                                                           ),
                                                           Text(
-                                                            'CUP ${widget.orderdetails?.total}',
+                                                            'CUP ${widget!.orderdetails?.total}',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .headlineSmall
