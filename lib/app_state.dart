@@ -44,6 +44,27 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _emailuserid = prefs.getString('ff_emailuserid') ?? _emailuserid;
     });
+    _safeInit(() {
+      _photourl = prefs.getString('ff_photourl') ?? _photourl;
+    });
+    _safeInit(() {
+      _age = prefs.getString('ff_age') ?? _age;
+    });
+    _safeInit(() {
+      _plaza = prefs.getString('ff_plaza') ?? _plaza;
+    });
+    _safeInit(() {
+      _especiality = prefs.getString('ff_especiality') ?? _especiality;
+    });
+    _safeInit(() {
+      _certifications = prefs.getString('ff_certifications') ?? _certifications;
+    });
+    _safeInit(() {
+      _salary = prefs.getString('ff_salary') ?? _salary;
+    });
+    _safeInit(() {
+      _workplace = prefs.getString('ff_workplace') ?? _workplace;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -200,6 +221,55 @@ class FFAppState extends ChangeNotifier {
   String get userid => _userid;
   set userid(String value) {
     _userid = value;
+  }
+
+  String _photourl = '';
+  String get photourl => _photourl;
+  set photourl(String value) {
+    _photourl = value;
+    prefs.setString('ff_photourl', value);
+  }
+
+  String _age = '';
+  String get age => _age;
+  set age(String value) {
+    _age = value;
+    prefs.setString('ff_age', value);
+  }
+
+  String _plaza = '';
+  String get plaza => _plaza;
+  set plaza(String value) {
+    _plaza = value;
+    prefs.setString('ff_plaza', value);
+  }
+
+  String _especiality = '';
+  String get especiality => _especiality;
+  set especiality(String value) {
+    _especiality = value;
+    prefs.setString('ff_especiality', value);
+  }
+
+  String _certifications = '';
+  String get certifications => _certifications;
+  set certifications(String value) {
+    _certifications = value;
+    prefs.setString('ff_certifications', value);
+  }
+
+  String _salary = '';
+  String get salary => _salary;
+  set salary(String value) {
+    _salary = value;
+    prefs.setString('ff_salary', value);
+  }
+
+  String _workplace = '';
+  String get workplace => _workplace;
+  set workplace(String value) {
+    _workplace = value;
+    prefs.setString('ff_workplace', value);
   }
 }
 

@@ -7,5 +7,7 @@ export 'table.dart';
 
 export 'tables/category.dart';
 export 'tables/products.dart';
+export 'tables/bolsa_de_empleo.dart';
 export 'tables/user.dart';
+export 'tables/gestores.dart';
 export 'tables/order.dart';

@@ -43,4 +43,7 @@ class ProductsRow extends SupabaseDataRow {
 
   String? get status => getField<String>('status');
   set status(String? value) => setField<String>('status', value);
+
+  int? get precioComision => getField<int>('Precio_comision');
+  set precioComision(int? value) => setField<int>('Precio_comision', value);
 }

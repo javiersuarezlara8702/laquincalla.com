@@ -21,3 +21,10 @@ export '/login3/login3_widget.dart' show Login3Widget;
 export '/forgot_password01/forgot_password01_widget.dart'
     show ForgotPassword01Widget;
 export '/pages/product_copy/product_copy_widget.dart' show ProductCopyWidget;
+export '/createcount01/createcount01_widget.dart' show Createcount01Widget;
+export '/onboarding02/onboarding02_widget.dart' show Onboarding02Widget;
+export '/create_account_copy/create_account_copy_widget.dart'
+    show CreateAccountCopyWidget;
+export '/listofworkers/listofworkers_widget.dart' show ListofworkersWidget;
+export '/pages/edit_profile_copy/edit_profile_copy_widget.dart'
+    show EditProfileCopyWidget;

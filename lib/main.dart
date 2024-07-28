@@ -120,9 +120,10 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'homeCopyCopy': HomeCopyCopyWidget(),
-      'cart': CartWidget(),
       'profile': ProfileWidget(),
+      'cart': CartWidget(),
+      'homeCopyCopy': HomeCopyCopyWidget(),
+      'Listofworkers': ListofworkersWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -147,8 +148,8 @@ class _NavBarPageState extends State<NavBarPage> {
         haptic: false,
         tabs: [
           GButton(
-            icon: Icons.home_outlined,
-            text: 'Inicio',
+            icon: Icons.person,
+            text: 'Perfil',
             iconSize: 24.0,
           ),
           GButton(
@@ -157,8 +158,13 @@ class _NavBarPageState extends State<NavBarPage> {
             iconSize: 24.0,
           ),
           GButton(
-            icon: Icons.person,
-            text: 'Perfil',
+            icon: Icons.home_outlined,
+            text: 'Inicio',
+            iconSize: 24.0,
+          ),
+          GButton(
+            icon: Icons.list,
+            text: 'Trabajadores',
             iconSize: 24.0,
           )
         ],

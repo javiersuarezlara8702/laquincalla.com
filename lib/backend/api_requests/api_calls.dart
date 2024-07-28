@@ -940,6 +940,122 @@ class SerachuseridCall {
       alwaysAllowBody: false,
     );
   }
+
+  static String? name(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].name''',
+      ));
+  static String? email(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].email''',
+      ));
+  static String? phonenumberr(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].phonenumberr''',
+      ));
+  static String? derection(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].derection''',
+      ));
+  static String? userid(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].user_id''',
+      ));
+  static String? rol(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].rol''',
+      ));
+}
+
+class SearchtrabajadoresuseridCall {
+  static Future<ApiCallResponse> call({
+    String? search = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'searchtrabajadoresuserid',
+      apiUrl:
+          'https://jiksgqisqqkspbvqrggk.supabase.co/rest/v1/bolsa_de_empleo?email=ilike.*${search}*&select=*',
+      callType: ApiCallType.GET,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppa3NncWlzcXFrc3BidnFyZ2drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg4MTI1MjEsImV4cCI6MjAyNDM4ODUyMX0.aEZXDX2arf49-Rll7sBizxekGXGRePMu17H8SIeEoww',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppa3NncWlzcXFrc3BidnFyZ2drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg4MTI1MjEsImV4cCI6MjAyNDM4ODUyMX0.aEZXDX2arf49-Rll7sBizxekGXGRePMu17H8SIeEoww',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? name(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].name''',
+      ));
+  static String? lastname(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].lastname''',
+      ));
+  static int? phone(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].phone''',
+      ));
+  static String? aspitation(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].aspiration''',
+      ));
+  static String? especiality(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].especiality''',
+      ));
+  static int? idealslary(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].ideal_slary''',
+      ));
+  static String? workplace(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].work_place''',
+      ));
+  static String? status(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].status''',
+      ));
+  static String? adress(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].Adress''',
+      ));
+  static String? rol(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].Rol''',
+      ));
+  static String? userid(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].user_id''',
+      ));
+  static String? email(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].email''',
+      ));
+  static String? photourl(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].photo_url''',
+      ));
+  static int? age(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].age''',
+      ));
+  static String? certifications(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].certifications''',
+      ));
 }
 
 class ApiPagingParams {

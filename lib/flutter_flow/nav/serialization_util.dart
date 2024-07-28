@@ -210,8 +210,12 @@ dynamic deserializeParam<T>(
             return CategoryRow(data);
           case ProductsRow:
             return ProductsRow(data);
+          case BolsaDeEmpleoRow:
+            return BolsaDeEmpleoRow(data);
           case UserRow:
             return UserRow(data);
+          case GestoresRow:
+            return GestoresRow(data);
           case OrderRow:
             return OrderRow(data);
           default:

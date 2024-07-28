@@ -1,4 +1,5 @@
 import '/auth/supabase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -116,7 +117,88 @@ class _HomeCopyCopyWidgetState extends State<HomeCopyCopyWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      context.pushNamed('editProfile');
+                      var _shouldSetState = false;
+                      _model.apiResultj29 = await SerachuseridCall.call(
+                        search: FFAppState().emailuserid,
+                      );
+
+                      _shouldSetState = true;
+                      if ((_model.apiResultj29?.succeeded ?? true)) {
+                        if (SerachuseridCall.rol(
+                              (_model.apiResultj29?.jsonBody ?? ''),
+                            ) ==
+                            'cliente') {
+                          context.pushNamed('editProfile');
+
+                          if (_shouldSetState) setState(() {});
+                          return;
+                        } else {
+                          _model.apiResult4dx =
+                              await SearchtrabajadoresuseridCall.call(
+                            search: FFAppState().emailuserid,
+                          );
+
+                          _shouldSetState = true;
+                          if ((_model.apiResult4dx?.succeeded ?? true)) {
+                            if (SearchtrabajadoresuseridCall.rol(
+                                  (_model.apiResult4dx?.jsonBody ?? ''),
+                                ) ==
+                                'trabajador') {
+                              context.pushNamed('editProfileCopy');
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'rol de usuario no encontrado',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).secondary,
+                                ),
+                              );
+                              if (_shouldSetState) setState(() {});
+                              return;
+                            }
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'error de conexion 2 intentelo de nuevo mas tarde',
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).secondary,
+                              ),
+                            );
+                          }
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'error de conexion intentelo de nuevo ',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+                        if (_shouldSetState) setState(() {});
+                        return;
+                      }
+
+                      if (_shouldSetState) setState(() {});
                     },
                     child: Container(
                       width: double.infinity,

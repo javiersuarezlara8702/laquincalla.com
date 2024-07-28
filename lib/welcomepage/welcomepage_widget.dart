@@ -299,7 +299,7 @@ class _WelcomepageWidgetState extends State<WelcomepageWidget>
                               8.0, 0.0, 0.0, 16.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              context.pushNamed('CreateAccount');
+                              context.pushNamed('Onboarding02');
                             },
                             text: 'Crear cuenta',
                             options: FFButtonOptions(

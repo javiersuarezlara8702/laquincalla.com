@@ -52,4 +52,18 @@ class OrderRow extends SupabaseDataRow {
 
   String? get orderNote => getField<String>('order_note');
   set orderNote(String? value) => setField<String>('order_note', value);
+
+  String? get comicionTotal => getField<String>('comicion_total');
+  set comicionTotal(String? value) => setField<String>('comicion_total', value);
+
+  String? get statusTax => getField<String>('status_tax');
+  set statusTax(String? value) => setField<String>('status_tax', value);
+
+  String? get nombreDelGestor => getField<String>('nombre_del_gestor');
+  set nombreDelGestor(String? value) =>
+      setField<String>('nombre_del_gestor', value);
+
+  String? get telefonoDelGestor => getField<String>('telefono_del_gestor');
+  set telefonoDelGestor(String? value) =>
+      setField<String>('telefono_del_gestor', value);
 }

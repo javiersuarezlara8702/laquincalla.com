@@ -101,10 +101,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/profile',
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'profile')
-              : NavBarPage(
-                  initialPage: 'profile',
-                  page: ProfileWidget(),
-                ),
+              : ProfileWidget(),
         ),
         FFRoute(
           name: 'product',
@@ -264,6 +261,36 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 ParamType.JSON,
               ),
             ),
+          ),
+        ),
+        FFRoute(
+          name: 'createcount01',
+          path: '/createcount01',
+          builder: (context, params) => Createcount01Widget(),
+        ),
+        FFRoute(
+          name: 'Onboarding02',
+          path: '/onboarding02',
+          builder: (context, params) => Onboarding02Widget(),
+        ),
+        FFRoute(
+          name: 'CreateAccountCopy',
+          path: '/createAccountCopy',
+          builder: (context, params) => CreateAccountCopyWidget(),
+        ),
+        FFRoute(
+          name: 'Listofworkers',
+          path: '/listofworkers',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Listofworkers')
+              : ListofworkersWidget(),
+        ),
+        FFRoute(
+          name: 'editProfileCopy',
+          path: '/editProfileCopy',
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: EditProfileCopyWidget(),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

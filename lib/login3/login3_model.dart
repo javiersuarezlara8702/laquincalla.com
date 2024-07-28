@@ -1,4 +1,5 @@
 import '/auth/supabase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -22,6 +23,10 @@ class Login3Model extends FlutterFlowModel<Login3Widget> {
   TextEditingController? passwordTextController;
   late bool passwordVisibility;
   String? Function(BuildContext, String?)? passwordTextControllerValidator;
+  // Stores action output result for [Backend Call - API (serachuserid)] action in Button widget.
+  ApiCallResponse? apiResult0sw;
+  // Stores action output result for [Backend Call - API (searchtrabajadoresuserid)] action in Button widget.
+  ApiCallResponse? apiResult0ej;
 
   @override
   void initState(BuildContext context) {
