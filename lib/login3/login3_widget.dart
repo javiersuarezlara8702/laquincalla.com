@@ -72,12 +72,12 @@ class _Login3WidgetState extends State<Login3Widget> {
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
               : FocusScope.of(context).unfocus(),
-          child: WillPopScope(
-            onWillPop: () async => false,
-            child: Scaffold(
-              key: scaffoldKey,
-              backgroundColor: Colors.white,
-              body: Container(
+          child: Scaffold(
+            key: scaffoldKey,
+            backgroundColor: Colors.white,
+            body: SafeArea(
+              top: true,
+              child: Container(
                 height: double.infinity,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -439,8 +439,9 @@ class _Login3WidgetState extends State<Login3Widget> {
                                                     true)) {
                                                   FFAppState().userid =
                                                       getJsonField(
-                                                    login3SerachuseridResponse
-                                                        .jsonBody,
+                                                    (_model.apiResult0sw
+                                                            ?.jsonBody ??
+                                                        ''),
                                                     r'''$[:].user_id''',
                                                   ).toString();
                                                   setState(() {});
@@ -448,20 +449,23 @@ class _Login3WidgetState extends State<Login3Widget> {
                                                       FFAppState().userid) {
                                                     FFAppState().name =
                                                         getJsonField(
-                                                      login3SerachuseridResponse
-                                                          .jsonBody,
+                                                      (_model.apiResult0sw
+                                                              ?.jsonBody ??
+                                                          ''),
                                                       r'''$[:].name''',
                                                     ).toString();
                                                     FFAppState().address =
                                                         getJsonField(
-                                                      login3SerachuseridResponse
-                                                          .jsonBody,
+                                                      (_model.apiResult0sw
+                                                              ?.jsonBody ??
+                                                          ''),
                                                       r'''$[:].derection''',
                                                     ).toString();
                                                     FFAppState().phone =
                                                         getJsonField(
-                                                      login3SerachuseridResponse
-                                                          .jsonBody,
+                                                      (_model.apiResult0sw
+                                                              ?.jsonBody ??
+                                                          ''),
                                                       r'''$[:].phonenumberr''',
                                                     ).toString();
                                                     setState(() {});
@@ -487,84 +491,93 @@ class _Login3WidgetState extends State<Login3Widget> {
                                                         true)) {
                                                       FFAppState().userid =
                                                           getJsonField(
-                                                        scrollingContainerSearchtrabajadoresuseridResponse
-                                                            .jsonBody,
+                                                        (_model.apiResult0ej
+                                                                ?.jsonBody ??
+                                                            ''),
                                                         r'''$[:].user_id''',
                                                       ).toString();
                                                       setState(() {});
                                                       if (currentUserUid ==
                                                           FFAppState().userid) {
                                                         FFAppState().name =
-                                                            SearchtrabajadoresuseridCall
-                                                                .name(
-                                                          scrollingContainerSearchtrabajadoresuseridResponse
-                                                              .jsonBody,
-                                                        )!;
+                                                            getJsonField(
+                                                          (_model.apiResult0ej
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$[:].name''',
+                                                        ).toString();
                                                         FFAppState().lastName =
-                                                            SearchtrabajadoresuseridCall
-                                                                .lastname(
-                                                          scrollingContainerSearchtrabajadoresuseridResponse
-                                                              .jsonBody,
-                                                        )!;
+                                                            getJsonField(
+                                                          (_model.apiResult0ej
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$[:].lastname''',
+                                                        ).toString();
                                                         FFAppState().address =
-                                                            SearchtrabajadoresuseridCall
-                                                                .adress(
-                                                          scrollingContainerSearchtrabajadoresuseridResponse
-                                                              .jsonBody,
-                                                        )!;
+                                                            getJsonField(
+                                                          (_model.apiResult0ej
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$[:].Adress''',
+                                                        ).toString();
                                                         FFAppState().phone =
-                                                            SearchtrabajadoresuseridCall
-                                                                    .phone(
-                                                          scrollingContainerSearchtrabajadoresuseridResponse
-                                                              .jsonBody,
-                                                        )!
-                                                                .toString();
+                                                            getJsonField(
+                                                          (_model.apiResult0ej
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$[:].phone''',
+                                                        ).toString();
                                                         FFAppState().photourl =
-                                                            SearchtrabajadoresuseridCall
-                                                                .photourl(
-                                                          scrollingContainerSearchtrabajadoresuseridResponse
-                                                              .jsonBody,
-                                                        )!;
+                                                            getJsonField(
+                                                          (_model.apiResult0ej
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$[:].photo_url''',
+                                                        ).toString();
                                                         FFAppState().age =
-                                                            SearchtrabajadoresuseridCall
-                                                                    .age(
-                                                          scrollingContainerSearchtrabajadoresuseridResponse
-                                                              .jsonBody,
-                                                        )!
-                                                                .toString();
+                                                            getJsonField(
+                                                          (_model.apiResult0ej
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$[:].age''',
+                                                        ).toString();
                                                         FFAppState().plaza =
-                                                            SearchtrabajadoresuseridCall
-                                                                .aspitation(
-                                                          scrollingContainerSearchtrabajadoresuseridResponse
-                                                              .jsonBody,
-                                                        )!;
+                                                            getJsonField(
+                                                          (_model.apiResult0ej
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$[:].aspiration''',
+                                                        ).toString();
                                                         FFAppState()
                                                                 .especiality =
-                                                            SearchtrabajadoresuseridCall
-                                                                .especiality(
-                                                          scrollingContainerSearchtrabajadoresuseridResponse
-                                                              .jsonBody,
-                                                        )!;
+                                                            getJsonField(
+                                                          (_model.apiResult0ej
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$[:].especiality''',
+                                                        ).toString();
                                                         FFAppState()
                                                                 .certifications =
-                                                            SearchtrabajadoresuseridCall
-                                                                .certifications(
-                                                          scrollingContainerSearchtrabajadoresuseridResponse
-                                                              .jsonBody,
-                                                        )!;
+                                                            getJsonField(
+                                                          (_model.apiResult0ej
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$[:].certifications''',
+                                                        ).toString();
                                                         FFAppState().salary =
-                                                            SearchtrabajadoresuseridCall
-                                                                    .idealslary(
-                                                          scrollingContainerSearchtrabajadoresuseridResponse
-                                                              .jsonBody,
-                                                        )!
-                                                                .toString();
+                                                            getJsonField(
+                                                          (_model.apiResult0ej
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$[:].ideal_slary''',
+                                                        ).toString();
                                                         FFAppState().workplace =
-                                                            SearchtrabajadoresuseridCall
-                                                                .workplace(
-                                                          scrollingContainerSearchtrabajadoresuseridResponse
-                                                              .jsonBody,
-                                                        )!;
+                                                            getJsonField(
+                                                          (_model.apiResult0ej
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$[:].work_place''',
+                                                        ).toString();
                                                         setState(() {});
 
                                                         context.pushNamedAuth(
