@@ -150,7 +150,6 @@ class CreateAProductCall {
     String? name = '',
     int? price,
     String? description = '',
-    String? category = '',
     int? quanty,
     String? photoUrl = '',
   }) async {
@@ -160,11 +159,10 @@ class CreateAProductCall {
 [
   {
     "name": "${name} ",
-    "quanty ": ${quanty},
+    "quanty": ${quanty},
     "price": ${price},
-    "description ": "${description}",
-    "category ": "${category}",
-    "photo_url ": "${photoUrl}"
+    "description": "${description}",
+    "photo_url": "${photoUrl}"
   }
 ]''';
     return ApiManager.instance.makeApiCall(
@@ -173,10 +171,11 @@ class CreateAProductCall {
       callType: ApiCallType.POST,
       headers: {
         'apikey':
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppa3NncWlzcXFrc3BidnFyZ2drIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwODgxMjUyMSwiZXhwIjoyMDI0Mzg4NTIxfQ.eii7xhYWDYJ6dISthyT5Gz652I1FmKwZNtCa3TiC-bY',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppa3NncWlzcXFrc3BidnFyZ2drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg4MTI1MjEsImV4cCI6MjAyNDM4ODUyMX0.aEZXDX2arf49-Rll7sBizxekGXGRePMu17H8SIeEoww',
         'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppa3NncWlzcXFrc3BidnFyZ2drIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwODgxMjUyMSwiZXhwIjoyMDI0Mzg4NTIxfQ.eii7xhYWDYJ6dISthyT5Gz652I1FmKwZNtCa3TiC-bY',
-        'Prefer': 'return=representation',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppa3NncWlzcXFrc3BidnFyZ2drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg4MTI1MjEsImV4cCI6MjAyNDM4ODUyMX0.aEZXDX2arf49-Rll7sBizxekGXGRePMu17H8SIeEoww',
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal',
       },
       params: {},
       body: ffApiRequestBody,
@@ -206,7 +205,7 @@ class UpdateAProductCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Update a product',
       apiUrl: '${baseUrl}/rest/v1/Products?some_column=eq',
-      callType: ApiCallType.PUT,
+      callType: ApiCallType.PATCH,
       headers: {
         'Authorization':
             'Basic Y2tfZWE3YmMxNmRmZTRmMjMxYzI2NmY5NjNlOGI3OGE5MmRiZjMyMzNhYjpjc19mZDY2ZThjZTJjNjMwMzIwOWE2MzBhMTY3MWEyZjg2ZDg4NzQwNTc3',
@@ -1056,6 +1055,90 @@ class SearchtrabajadoresuseridCall {
         response,
         r'''$[:].certifications''',
       ));
+}
+
+class ReedBolsaDeEmpleoRowsCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'reed bolsa de empleo rows ',
+      apiUrl:
+          'https://jiksgqisqqkspbvqrggk.supabase.co/rest/v1/bolsa_de_empleo?select=*',
+      callType: ApiCallType.GET,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppa3NncWlzcXFrc3BidnFyZ2drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg4MTI1MjEsImV4cCI6MjAyNDM4ODUyMX0.aEZXDX2arf49-Rll7sBizxekGXGRePMu17H8SIeEoww',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppa3NncWlzcXFrc3BidnFyZ2drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg4MTI1MjEsImV4cCI6MjAyNDM4ODUyMX0.aEZXDX2arf49-Rll7sBizxekGXGRePMu17H8SIeEoww',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UpdatephototrabajadoresCall {
+  static Future<ApiCallResponse> call({
+    String? userId = '',
+    String? photoUrl = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "user_id": "${userId}",
+  "photo_url": "${photoUrl}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'updatephototrabajadores',
+      apiUrl:
+          'https://jiksgqisqqkspbvqrggk.supabase.co/rest/v1/bolsa_de_empleo?user_id=eq.${userId}',
+      callType: ApiCallType.PATCH,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppa3NncWlzcXFrc3BidnFyZ2drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg4MTI1MjEsImV4cCI6MjAyNDM4ODUyMX0.aEZXDX2arf49-Rll7sBizxekGXGRePMu17H8SIeEoww',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppa3NncWlzcXFrc3BidnFyZ2drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg4MTI1MjEsImV4cCI6MjAyNDM4ODUyMX0.aEZXDX2arf49-Rll7sBizxekGXGRePMu17H8SIeEoww',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SearchlistofworkerCall {
+  static Future<ApiCallResponse> call({
+    String? search = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'searchlistofworker',
+      apiUrl:
+          'https://jiksgqisqqkspbvqrggk.supabase.co/rest/v1/bolsa_de_empleo?especiality=ilike.*${search}*&select=*',
+      callType: ApiCallType.GET,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppa3NncWlzcXFrc3BidnFyZ2drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg4MTI1MjEsImV4cCI6MjAyNDM4ODUyMX0.aEZXDX2arf49-Rll7sBizxekGXGRePMu17H8SIeEoww',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imppa3NncWlzcXFrc3BidnFyZ2drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg4MTI1MjEsImV4cCI6MjAyNDM4ODUyMX0.aEZXDX2arf49-Rll7sBizxekGXGRePMu17H8SIeEoww',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 class ApiPagingParams {

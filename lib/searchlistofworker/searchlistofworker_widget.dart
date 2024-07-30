@@ -12,25 +12,31 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'listofworkers_model.dart';
-export 'listofworkers_model.dart';
+import 'searchlistofworker_model.dart';
+export 'searchlistofworker_model.dart';
 
-class ListofworkersWidget extends StatefulWidget {
-  const ListofworkersWidget({super.key});
+class SearchlistofworkerWidget extends StatefulWidget {
+  const SearchlistofworkerWidget({
+    super.key,
+    required this.search,
+  });
+
+  final String? search;
 
   @override
-  State<ListofworkersWidget> createState() => _ListofworkersWidgetState();
+  State<SearchlistofworkerWidget> createState() =>
+      _SearchlistofworkerWidgetState();
 }
 
-class _ListofworkersWidgetState extends State<ListofworkersWidget> {
-  late ListofworkersModel _model;
+class _SearchlistofworkerWidgetState extends State<SearchlistofworkerWidget> {
+  late SearchlistofworkerModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ListofworkersModel());
+    _model = createModel(context, () => SearchlistofworkerModel());
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
@@ -206,7 +212,9 @@ class _ListofworkersWidgetState extends State<ListofworkersWidget> {
                   child: FutureBuilder<ApiCallResponse>(
                     future: (_model.apiRequestCompleter ??=
                             Completer<ApiCallResponse>()
-                              ..complete(ReedBolsaDeEmpleoRowsCall.call()))
+                              ..complete(SearchlistofworkerCall.call(
+                                search: widget!.search,
+                              )))
                         .future,
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -223,13 +231,12 @@ class _ListofworkersWidgetState extends State<ListofworkersWidget> {
                           ),
                         );
                       }
-                      final listViewReedBolsaDeEmpleoRowsResponse =
-                          snapshot.data!;
+                      final listViewSearchlistofworkerResponse = snapshot.data!;
 
                       return Builder(
                         builder: (context) {
                           final workers = getJsonField(
-                            listViewReedBolsaDeEmpleoRowsResponse.jsonBody,
+                            listViewSearchlistofworkerResponse.jsonBody,
                             r'''$''',
                           ).toList();
 
@@ -340,7 +347,7 @@ class _ListofworkersWidgetState extends State<ListofworkersWidget> {
                                       width: 333.0,
                                       height: 133.0,
                                       decoration: BoxDecoration(
-                                        color: Color(0x65FFFFFF),
+                                        color: Color(0x6CFFFFFF),
                                         boxShadow: [
                                           BoxShadow(
                                             blurRadius: 4.0,

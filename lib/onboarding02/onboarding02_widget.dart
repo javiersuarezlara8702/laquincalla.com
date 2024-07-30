@@ -375,8 +375,8 @@ class _Onboarding02WidgetState extends State<Onboarding02Widget>
                                     topLeft: Radius.circular(16.0),
                                     topRight: Radius.circular(0.0),
                                   ),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1614597396930-cd6760b99f7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fG1vdW50YWluc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60',
+                                  child: Image.asset(
+                                    'assets/images/WhatsApp_Image_2024-07-25_at_11.37.37_AM.jpeg',
                                     width: 120.0,
                                     height: 190.0,
                                     fit: BoxFit.cover,
@@ -416,7 +416,7 @@ class _Onboarding02WidgetState extends State<Onboarding02Widget>
                     children: [
                       Container(
                         width: double.infinity,
-                        height: 230.0,
+                        height: 264.0,
                         child: Stack(
                           children: [
                             Padding(
@@ -589,7 +589,7 @@ class _Onboarding02WidgetState extends State<Onboarding02Widget>
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 12.0, 16.0, 0.0),
+                            16.0, 0.0, 16.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             context.pushNamed('createcount01');

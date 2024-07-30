@@ -3,11 +3,8 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'create_account_copy_model.dart';
 export 'create_account_copy_model.dart';
@@ -79,8 +76,6 @@ class _CreateAccountCopyWidgetState extends State<CreateAccountCopyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -190,122 +185,6 @@ class _CreateAccountCopyWidgetState extends State<CreateAccountCopyWidget> {
                                           ),
                                     ),
                                   ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
-                                    child: Text(
-                                      'toca el area para subir una foto',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      final selectedMedia =
-                                          await selectMediaWithSourceBottomSheet(
-                                        context: context,
-                                        storageFolderPath: 'img',
-                                        allowPhoto: true,
-                                      );
-                                      if (selectedMedia != null &&
-                                          selectedMedia.every((m) =>
-                                              validateFileFormat(
-                                                  m.storagePath, context))) {
-                                        setState(() =>
-                                            _model.isDataUploading = true);
-                                        var selectedUploadedFiles =
-                                            <FFUploadedFile>[];
-
-                                        var downloadUrls = <String>[];
-                                        try {
-                                          showUploadMessage(
-                                            context,
-                                            'Uploading file...',
-                                            showLoading: true,
-                                          );
-                                          selectedUploadedFiles = selectedMedia
-                                              .map((m) => FFUploadedFile(
-                                                    name: m.storagePath
-                                                        .split('/')
-                                                        .last,
-                                                    bytes: m.bytes,
-                                                    height:
-                                                        m.dimensions?.height,
-                                                    width: m.dimensions?.width,
-                                                    blurHash: m.blurHash,
-                                                  ))
-                                              .toList();
-
-                                          downloadUrls =
-                                              await uploadSupabaseStorageFiles(
-                                            bucketName: 'fotos',
-                                            selectedFiles: selectedMedia,
-                                          );
-                                        } finally {
-                                          ScaffoldMessenger.of(context)
-                                              .hideCurrentSnackBar();
-                                          _model.isDataUploading = false;
-                                        }
-                                        if (selectedUploadedFiles.length ==
-                                                selectedMedia.length &&
-                                            downloadUrls.length ==
-                                                selectedMedia.length) {
-                                          setState(() {
-                                            _model.uploadedLocalFile =
-                                                selectedUploadedFiles.first;
-                                            _model.uploadedFileUrl =
-                                                downloadUrls.first;
-                                          });
-                                          showUploadMessage(
-                                              context, 'Success!');
-                                        } else {
-                                          setState(() {});
-                                          showUploadMessage(
-                                              context, 'Failed to upload data');
-                                          return;
-                                        }
-                                      }
-
-                                      FFAppState().photourl =
-                                          _model.uploadedFileUrl;
-                                      setState(() {});
-                                    },
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(16.0),
-                                      child: OctoImage(
-                                        placeholderBuilder: (_) =>
-                                            SizedBox.expand(
-                                          child: Image(
-                                            image: BlurHashImage(
-                                                'L6HxKU0001ys00I8~W-U0000~B#k'),
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        image: NetworkImage(
-                                          FFAppState().photourl,
-                                        ),
-                                        width: 304.0,
-                                        height: 150.0,
-                                        fit: BoxFit.contain,
-                                        errorBuilder:
-                                            (context, error, stackTrace) =>
-                                                Image.asset(
-                                          'assets/images/error_image.webp',
-                                          width: 304.0,
-                                          height: 150.0,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 16.0),
@@ -330,7 +209,7 @@ class _CreateAccountCopyWidgetState extends State<CreateAccountCopyWidget> {
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
                                                   ),
-                                          enabledBorder: OutlineInputBorder(
+                                          enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0xFFF1F4F8),
                                               width: 2.0,
@@ -338,7 +217,7 @@ class _CreateAccountCopyWidgetState extends State<CreateAccountCopyWidget> {
                                             borderRadius:
                                                 BorderRadius.circular(12.0),
                                           ),
-                                          focusedBorder: OutlineInputBorder(
+                                          focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0xFF4B39EF),
                                               width: 2.0,
@@ -346,7 +225,7 @@ class _CreateAccountCopyWidgetState extends State<CreateAccountCopyWidget> {
                                             borderRadius:
                                                 BorderRadius.circular(12.0),
                                           ),
-                                          errorBorder: OutlineInputBorder(
+                                          errorBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0xFFFF5963),
                                               width: 2.0,
@@ -355,7 +234,7 @@ class _CreateAccountCopyWidgetState extends State<CreateAccountCopyWidget> {
                                                 BorderRadius.circular(12.0),
                                           ),
                                           focusedErrorBorder:
-                                              OutlineInputBorder(
+                                              UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0xFFFF5963),
                                               width: 2.0,
@@ -1047,7 +926,8 @@ class _CreateAccountCopyWidgetState extends State<CreateAccountCopyWidget> {
                                         ],
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: 'Especialidad ',
+                                          labelText:
+                                              'Especialidad (ej: Chef, dependinte)',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
                                                   .labelLarge
@@ -1462,58 +1342,6 @@ class _CreateAccountCopyWidgetState extends State<CreateAccountCopyWidget> {
                                                                   return;
                                                                 }
 
-                                                                await BolsaDeEmpleoTable()
-                                                                    .insert({
-                                                                  'name': _model
-                                                                      .nombreTextController
-                                                                      .text,
-                                                                  'email': _model
-                                                                      .emailAddressTextController
-                                                                      .text,
-                                                                  'user_id':
-                                                                      currentUserUid,
-                                                                  'lastname': _model
-                                                                      .apellidosTextController
-                                                                      .text,
-                                                                  'phone': int
-                                                                      .tryParse(_model
-                                                                          .telefonoTextController
-                                                                          .text),
-                                                                  'aspiration':
-                                                                      _model
-                                                                          .plasaTextController
-                                                                          .text,
-                                                                  'especiality':
-                                                                      _model
-                                                                          .epecialityTextController
-                                                                          .text,
-                                                                  'certifications':
-                                                                      _model
-                                                                          .certificationsTextController
-                                                                          .text,
-                                                                  'ideal_slary':
-                                                                      int.tryParse(_model
-                                                                          .salaryTextController
-                                                                          .text),
-                                                                  'work_place':
-                                                                      _model
-                                                                          .workplaceTextController
-                                                                          .text,
-                                                                  'Adress': _model
-                                                                      .direccionTextController
-                                                                      .text,
-                                                                  'photuo_url':
-                                                                      _model
-                                                                          .uploadedFileUrl,
-                                                                  'status':
-                                                                      'desempleado',
-                                                                  'age': int.tryParse(
-                                                                      _model
-                                                                          .ageTextController
-                                                                          .text),
-                                                                  'Rol':
-                                                                      'publish',
-                                                                });
                                                                 FFAppState()
                                                                         .name =
                                                                     _model
@@ -1565,9 +1393,100 @@ class _CreateAccountCopyWidgetState extends State<CreateAccountCopyWidget> {
                                                                         .workplaceTextController
                                                                         .text;
                                                                 setState(() {});
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      'exito',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            4000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .success,
+                                                                  ),
+                                                                );
+                                                                await BolsaDeEmpleoTable()
+                                                                    .insert({
+                                                                  'name': _model
+                                                                      .nombreTextController
+                                                                      .text,
+                                                                  'email': _model
+                                                                      .emailAddressTextController
+                                                                      .text,
+                                                                  'user_id':
+                                                                      currentUserUid,
+                                                                  'lastname': _model
+                                                                      .apellidosTextController
+                                                                      .text,
+                                                                  'phone': int
+                                                                      .tryParse(_model
+                                                                          .telefonoTextController
+                                                                          .text),
+                                                                  'aspiration':
+                                                                      _model
+                                                                          .plasaTextController
+                                                                          .text,
+                                                                  'especiality':
+                                                                      _model
+                                                                          .epecialityTextController
+                                                                          .text,
+                                                                  'certifications':
+                                                                      _model
+                                                                          .certificationsTextController
+                                                                          .text,
+                                                                  'ideal_slary':
+                                                                      int.tryParse(_model
+                                                                          .salaryTextController
+                                                                          .text),
+                                                                  'work_place':
+                                                                      _model
+                                                                          .workplaceTextController
+                                                                          .text,
+                                                                  'Adress': _model
+                                                                      .direccionTextController
+                                                                      .text,
+                                                                  'status':
+                                                                      'desempleado',
+                                                                  'age': int.tryParse(
+                                                                      _model
+                                                                          .ageTextController
+                                                                          .text),
+                                                                  'Rol':
+                                                                      'trabajador',
+                                                                });
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      'exito en los rows',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            4000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .success,
+                                                                  ),
+                                                                );
 
                                                                 context.pushNamedAuth(
-                                                                    'homeCopyCopy',
+                                                                    'updatePhoto',
                                                                     context
                                                                         .mounted);
                                                               } else {

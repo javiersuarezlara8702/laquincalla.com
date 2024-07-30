@@ -9,6 +9,7 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
@@ -61,8 +62,8 @@ class _HomeCopyCopyWidgetState extends State<HomeCopyCopyWidget> {
                 'https://wa.me/+5354260383?text=Necesito%20asistencia%20con%20la%20aplicacion%20de%20La%20quincalla%20.com');
           },
           backgroundColor: FlutterFlowTheme.of(context).primaryText,
-          icon: Icon(
-            Icons.chat,
+          icon: FaIcon(
+            FontAwesomeIcons.whatsapp,
           ),
           elevation: 50.0,
           label: Text(

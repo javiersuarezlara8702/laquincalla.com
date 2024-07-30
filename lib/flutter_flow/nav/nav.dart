@@ -283,7 +283,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/listofworkers',
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'Listofworkers')
-              : ListofworkersWidget(),
+              : NavBarPage(
+                  initialPage: 'Listofworkers',
+                  page: ListofworkersWidget(),
+                ),
         ),
         FFRoute(
           name: 'editProfileCopy',
@@ -291,6 +294,77 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => NavBarPage(
             initialPage: '',
             page: EditProfileCopyWidget(),
+          ),
+        ),
+        FFRoute(
+          name: 'updatePhoto',
+          path: '/updatePhoto',
+          builder: (context, params) => UpdatePhotoWidget(),
+        ),
+        FFRoute(
+          name: 'workerdetails',
+          path: '/workerdetails',
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: WorkerdetailsWidget(
+              name: params.getParam(
+                'name',
+                ParamType.String,
+              ),
+              lasname: params.getParam(
+                'lasname',
+                ParamType.String,
+              ),
+              address: params.getParam(
+                'address',
+                ParamType.String,
+              ),
+              photourl: params.getParam(
+                'photourl',
+                ParamType.String,
+              ),
+              phone: params.getParam(
+                'phone',
+                ParamType.int,
+              ),
+              plaza: params.getParam(
+                'plaza',
+                ParamType.String,
+              ),
+              especializcion: params.getParam(
+                'especializcion',
+                ParamType.String,
+              ),
+              certification: params.getParam(
+                'certification',
+                ParamType.String,
+              ),
+              salary: params.getParam(
+                'salary',
+                ParamType.String,
+              ),
+              workplace: params.getParam(
+                'workplace',
+                ParamType.String,
+              ),
+              age: params.getParam(
+                'age',
+                ParamType.int,
+              ),
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'searchlistofworker',
+          path: '/searchlistofworker',
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: SearchlistofworkerWidget(
+              search: params.getParam(
+                'search',
+                ParamType.String,
+              ),
+            ),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

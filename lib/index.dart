@@ -28,3 +28,8 @@ export '/create_account_copy/create_account_copy_widget.dart'
 export '/listofworkers/listofworkers_widget.dart' show ListofworkersWidget;
 export '/pages/edit_profile_copy/edit_profile_copy_widget.dart'
     show EditProfileCopyWidget;
+export '/update_photo/update_photo_widget.dart' show UpdatePhotoWidget;
+export '/pages/workerdetails/workerdetails_widget.dart'
+    show WorkerdetailsWidget;
+export '/searchlistofworker/searchlistofworker_widget.dart'
+    show SearchlistofworkerWidget;

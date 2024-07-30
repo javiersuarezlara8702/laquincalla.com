@@ -14,6 +14,8 @@ class CartModel extends FlutterFlowModel<CartWidget> {
 
   // Stores action output result for [Backend Call - API (serachuserid)] action in Button widget.
   ApiCallResponse? userresponce;
+  // Stores action output result for [Backend Call - API (searchtrabajadoresuserid)] action in Button widget.
+  ApiCallResponse? apiResultzj2;
 
   @override
   void initState(BuildContext context) {}

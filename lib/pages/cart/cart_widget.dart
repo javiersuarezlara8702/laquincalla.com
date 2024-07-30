@@ -598,11 +598,118 @@ class _CartWidgetState extends State<CartWidget> {
                                           FlutterFlowTheme.of(context).success,
                                     ),
                                   );
+                                  FFAppState().userid = '';
+                                  setState(() {});
                                   FFAppState().userid = getJsonField(
                                     (_model.userresponce?.jsonBody ?? ''),
                                     r'''$[:].user_id''',
                                   ).toString();
                                   setState(() {});
+                                  if (FFAppState().userid != 'null') {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Permiso Cliente concedido',
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondary,
+                                      ),
+                                    );
+
+                                    context.pushNamed('checkpion');
+
+                                    if (_shouldSetState) setState(() {});
+                                    return;
+                                  } else {
+                                    _model.apiResultzj2 =
+                                        await SearchtrabajadoresuseridCall.call(
+                                      search: FFAppState().emailuserid,
+                                    );
+
+                                    _shouldSetState = true;
+                                    if ((_model.apiResultzj2?.succeeded ??
+                                        true)) {
+                                      FFAppState().userid = getJsonField(
+                                        (_model.apiResultzj2?.jsonBody ?? ''),
+                                        r'''$[:].user_id''',
+                                      ).toString();
+                                      setState(() {});
+                                      if (FFAppState().userid != null &&
+                                          FFAppState().userid != '') {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Permiso trabajador concedido',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                        );
+
+                                        context.pushNamed('checkpion');
+
+                                        if (_shouldSetState) setState(() {});
+                                        return;
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'userid empty',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                        );
+                                        if (_shouldSetState) setState(() {});
+                                        return;
+                                      }
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'error al localizar permiso de trabajador',
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 4000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                        ),
+                                      );
+                                      if (_shouldSetState) setState(() {});
+                                      return;
+                                    }
+                                  }
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
@@ -622,8 +729,6 @@ class _CartWidgetState extends State<CartWidget> {
                                   if (_shouldSetState) setState(() {});
                                   return;
                                 }
-
-                                context.pushNamed('checkpion');
 
                                 if (_shouldSetState) setState(() {});
                               },

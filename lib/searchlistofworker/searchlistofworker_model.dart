@@ -4,7 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
-import 'listofworkers_widget.dart' show ListofworkersWidget;
+import 'searchlistofworker_widget.dart' show SearchlistofworkerWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
@@ -14,7 +14,8 @@ import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ListofworkersModel extends FlutterFlowModel<ListofworkersWidget> {
+class SearchlistofworkerModel
+    extends FlutterFlowModel<SearchlistofworkerWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
