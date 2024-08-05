@@ -436,7 +436,7 @@ class _Onboarding02WidgetState extends State<Onboarding02Widget>
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Encuenta tus Insumos Con nosotros',
+                                          'Encuentra tus Insumos Con nosotros',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .displaySmall
@@ -475,7 +475,7 @@ class _Onboarding02WidgetState extends State<Onboarding02Widget>
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Registra Tu Ngocio para Comprar',
+                                          'Registra Tu Negocio para Comprar',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .displaySmall

@@ -377,7 +377,7 @@ class _WorkerdetailsWidgetState extends State<WorkerdetailsWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 25.0, 5.0),
                         child: Text(
-                          'Luares dode a trabajado',
+                          'Luares donde a trabajado',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',

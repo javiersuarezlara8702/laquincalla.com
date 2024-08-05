@@ -196,8 +196,8 @@ class _ListofworkersWidgetState extends State<ListofworkersWidget> {
                 ),
               ),
               Container(
-                width: 369.0,
-                height: 684.0,
+                width: 386.78,
+                height: 599.0,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
