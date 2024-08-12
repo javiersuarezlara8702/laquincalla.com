@@ -17,7 +17,6 @@ import 'package:url_launcher/url_launcher.dart';
 class ListofworkersModel extends FlutterFlowModel<ListofworkersWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
@@ -29,7 +28,6 @@ class ListofworkersModel extends FlutterFlowModel<ListofworkersWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();
   }

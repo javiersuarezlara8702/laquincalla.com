@@ -377,7 +377,7 @@ class _WorkerdetailsWidgetState extends State<WorkerdetailsWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 25.0, 5.0),
                         child: Text(
-                          'Luares donde a trabajado',
+                          'Lugares donde a trabajado',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
@@ -765,6 +765,7 @@ class _WorkerdetailsWidgetState extends State<WorkerdetailsWidget>
                             text: 'WhatsApp',
                             icon: FaIcon(
                               FontAwesomeIcons.whatsapp,
+                              size: 15.0,
                             ),
                             options: FFButtonOptions(
                               width: 165.0,

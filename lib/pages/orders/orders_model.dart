@@ -15,16 +15,13 @@ import 'package:provider/provider.dart';
 class OrdersModel extends FlutterFlowModel<OrdersWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   Completer<List<OrderRow>>? requestCompleter;
 
   @override
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    unfocusNode.dispose();
-  }
+  void dispose() {}
 
   /// Additional helper methods.
   Future waitForRequestCompleted({

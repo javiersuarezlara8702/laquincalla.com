@@ -17,7 +17,6 @@ import 'package:provider/provider.dart';
 class CheckpionModel extends FlutterFlowModel<CheckpionWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // Stores action output result for [Backend Call - Query Rows] action in checkpion widget.
   List<ProductsRow>? queryrows;
@@ -56,7 +55,6 @@ class CheckpionModel extends FlutterFlowModel<CheckpionWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldFocusNode1?.dispose();
     textController1?.dispose();
 
