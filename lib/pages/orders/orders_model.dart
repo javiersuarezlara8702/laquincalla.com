@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 class OrdersModel extends FlutterFlowModel<OrdersWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   Completer<List<OrderRow>>? requestCompleter;
 
   @override

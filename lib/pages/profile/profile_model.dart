@@ -13,6 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ProfileModel extends FlutterFlowModel<ProfileWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (serachuserid)] action in contentView_1 widget.
   ApiCallResponse? apiResultdui;
   // Stores action output result for [Backend Call - API (searchtrabajadoresuserid)] action in contentView_1 widget.

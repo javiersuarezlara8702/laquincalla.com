@@ -17,6 +17,7 @@ import 'package:provider/provider.dart';
 class EditProfileCopyModel extends FlutterFlowModel<EditProfileCopyWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =

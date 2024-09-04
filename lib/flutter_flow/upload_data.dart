@@ -10,7 +10,7 @@ import 'package:mime_type/mime_type.dart';
 import 'package:video_player/video_player.dart';
 import 'package:image/image.dart' as img;
 
-import 'flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow_util.dart';
 
 const allowedFormats = {'image/png', 'image/jpeg', 'video/mp4', 'image/gif'};

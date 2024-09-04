@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 class CreateAccountCopyModel extends FlutterFlowModel<CreateAccountCopyWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for Nombre widget.
   FocusNode? nombreFocusNode;
   TextEditingController? nombreTextController;
