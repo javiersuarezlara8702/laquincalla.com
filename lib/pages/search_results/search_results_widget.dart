@@ -32,7 +32,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
     super.initState();
     _model = createModel(context, () => SearchResultsModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -132,7 +132,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
 
                                 return RefreshIndicator(
                                   onRefresh: () async {
-                                    setState(() =>
+                                    safeSetState(() =>
                                         _model.apiRequestCompleter = null);
                                     await _model.waitForApiRequestCompleted();
                                   },

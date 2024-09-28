@@ -41,7 +41,7 @@ class _SearchlistofworkerWidgetState extends State<SearchlistofworkerWidget> {
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -250,7 +250,7 @@ class _SearchlistofworkerWidgetState extends State<SearchlistofworkerWidget> {
 
                               return RefreshIndicator(
                                 onRefresh: () async {
-                                  setState(
+                                  safeSetState(
                                       () => _model.apiRequestCompleter = null);
                                   await _model.waitForApiRequestCompleted();
                                 },

@@ -26,7 +26,7 @@ class _Createcount01WidgetState extends State<Createcount01Widget> {
     super.initState();
     _model = createModel(context, () => Createcount01Model());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

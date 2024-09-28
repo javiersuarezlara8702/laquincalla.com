@@ -59,7 +59,7 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
     _model.textController6 ??= TextEditingController();
     _model.textFieldFocusNode6 ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -448,7 +448,7 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                         'Vedado',
                                         'Centro Habana',
                                         'Habana Vieja',
-                                        'Santo suarez ',
+                                        'Santo Suarez',
                                         'Cerro',
                                         'Marianao',
                                         'Marianao ( desde 100 en adelante)',
@@ -473,12 +473,14 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                         'La lisa',
                                         'Habana del este ( cercania)',
                                         'Habana del este ( lejania)',
-                                        'Recogida en el local '
+                                        'Guanabacoa',
+                                        'Regla',
+                                        'Recogida en el Local'
                                       ],
                                       onChanged: (val) async {
-                                        setState(
+                                        safeSetState(
                                             () => _model.dropDownValue = val);
-                                        setState(() {
+                                        safeSetState(() {
                                           _model.textController6?.text =
                                               functions.returnShippingPrice(
                                                   _model.dropDownValue!)!;
@@ -492,7 +494,7 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                         FFAppState().deliverydoble =
                                             double.parse(
                                                 _model.textController6.text);
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       width: 333.0,
                                       height: 64.0,
@@ -968,7 +970,8 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                               );
                                             },
                                           );
-                                          if (_shouldSetState) setState(() {});
+                                          if (_shouldSetState)
+                                            safeSetState(() {});
                                           return;
                                         }
                                       } else {
@@ -990,7 +993,8 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                             );
                                           },
                                         );
-                                        if (_shouldSetState) setState(() {});
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
                                         return;
                                       }
                                     } else {
@@ -1011,7 +1015,7 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                           );
                                         },
                                       );
-                                      if (_shouldSetState) setState(() {});
+                                      if (_shouldSetState) safeSetState(() {});
                                       return;
                                     }
                                   } else {
@@ -1032,7 +1036,7 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                         );
                                       },
                                     );
-                                    if (_shouldSetState) setState(() {});
+                                    if (_shouldSetState) safeSetState(() {});
                                     return;
                                   }
 
@@ -1052,7 +1056,7 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                                 .secondary,
                                       ),
                                     );
-                                    if (_shouldSetState) setState(() {});
+                                    if (_shouldSetState) safeSetState(() {});
                                     return;
                                   }
                                   if (_model.dropDownValue != null &&
@@ -1099,9 +1103,9 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                     FFAppState().phone =
                                         _model.textController4.text;
                                     FFAppState().zone = _model.dropDownValue!;
-                                    setState(() {});
+                                    safeSetState(() {});
                                     FFAppState().lineItems = [];
-                                    setState(() {});
+                                    safeSetState(() {});
 
                                     context.pushNamed('success');
                                   } else {
@@ -1120,11 +1124,11 @@ class _CheckpionWidgetState extends State<CheckpionWidget> {
                                                 .secondary,
                                       ),
                                     );
-                                    if (_shouldSetState) setState(() {});
+                                    if (_shouldSetState) safeSetState(() {});
                                     return;
                                   }
 
-                                  if (_shouldSetState) setState(() {});
+                                  if (_shouldSetState) safeSetState(() {});
                                 },
                                 text: 'Realizar reserva',
                                 options: FFButtonOptions(

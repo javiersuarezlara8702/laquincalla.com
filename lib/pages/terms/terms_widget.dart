@@ -25,7 +25,7 @@ class _TermsWidgetState extends State<TermsWidget> {
     super.initState();
     _model = createModel(context, () => TermsModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

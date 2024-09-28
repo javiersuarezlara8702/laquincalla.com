@@ -34,7 +34,7 @@ class _CategoryCopyWidgetState extends State<CategoryCopyWidget> {
     super.initState();
     _model = createModel(context, () => CategoryCopyModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -127,7 +127,7 @@ class _CategoryCopyWidgetState extends State<CategoryCopyWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        setState(() => _model.requestCompleter = null);
+                        safeSetState(() => _model.requestCompleter = null);
                         await _model.waitForRequestCompleted(maxWait: 1000);
                       },
                       child: Column(

@@ -27,7 +27,7 @@ class _CartWidgetState extends State<CartWidget> {
     super.initState();
     _model = createModel(context, () => CartModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -336,7 +336,7 @@ class _CartWidgetState extends State<CartWidget> {
                                                     FFAppState()
                                                         .removeAtIndexFromLineItems(
                                                             lineItemIndex);
-                                                    setState(() {});
+                                                    safeSetState(() {});
 
                                                     context.pushNamed('cart');
                                                   },
@@ -606,7 +606,7 @@ class _CartWidgetState extends State<CartWidget> {
                                     var _shouldSetState = false;
                                     FFAppState().basePricestrig =
                                         FFAppState().basePrice.toString();
-                                    setState(() {});
+                                    safeSetState(() {});
                                     _model.userresponce =
                                         await SerachuseridCall.call(
                                       search: FFAppState().emailuserid,
@@ -635,12 +635,12 @@ class _CartWidgetState extends State<CartWidget> {
                                         ),
                                       );
                                       FFAppState().userid = '';
-                                      setState(() {});
+                                      safeSetState(() {});
                                       FFAppState().userid = getJsonField(
                                         (_model.userresponce?.jsonBody ?? ''),
                                         r'''$[:].user_id''',
                                       ).toString();
-                                      setState(() {});
+                                      safeSetState(() {});
                                       if (FFAppState().userid != 'null') {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
@@ -663,7 +663,8 @@ class _CartWidgetState extends State<CartWidget> {
 
                                         context.pushNamed('checkpion');
 
-                                        if (_shouldSetState) setState(() {});
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
                                         return;
                                       } else {
                                         _model.apiResultzj2 =
@@ -680,7 +681,7 @@ class _CartWidgetState extends State<CartWidget> {
                                                 ''),
                                             r'''$[:].user_id''',
                                           ).toString();
-                                          setState(() {});
+                                          safeSetState(() {});
                                           if (FFAppState().userid != null &&
                                               FFAppState().userid != '') {
                                             ScaffoldMessenger.of(context)
@@ -705,7 +706,7 @@ class _CartWidgetState extends State<CartWidget> {
                                             context.pushNamed('checkpion');
 
                                             if (_shouldSetState)
-                                              setState(() {});
+                                              safeSetState(() {});
                                             return;
                                           } else {
                                             ScaffoldMessenger.of(context)
@@ -727,7 +728,7 @@ class _CartWidgetState extends State<CartWidget> {
                                               ),
                                             );
                                             if (_shouldSetState)
-                                              setState(() {});
+                                              safeSetState(() {});
                                             return;
                                           }
                                         } else {
@@ -749,7 +750,8 @@ class _CartWidgetState extends State<CartWidget> {
                                                       .secondary,
                                             ),
                                           );
-                                          if (_shouldSetState) setState(() {});
+                                          if (_shouldSetState)
+                                            safeSetState(() {});
                                           return;
                                         }
                                       }
@@ -772,11 +774,11 @@ class _CartWidgetState extends State<CartWidget> {
                                                   .secondary,
                                         ),
                                       );
-                                      if (_shouldSetState) setState(() {});
+                                      if (_shouldSetState) safeSetState(() {});
                                       return;
                                     }
 
-                                    if (_shouldSetState) setState(() {});
+                                    if (_shouldSetState) safeSetState(() {});
                                   },
                             text: 'Continuar',
                             options: FFButtonOptions(

@@ -31,7 +31,7 @@ class _UpdatePhotoWidgetState extends State<UpdatePhotoWidget> {
     super.initState();
     _model = createModel(context, () => UpdatePhotoModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -143,7 +143,7 @@ class _UpdatePhotoWidgetState extends State<UpdatePhotoWidget> {
                         if (selectedMedia != null &&
                             selectedMedia.every((m) =>
                                 validateFileFormat(m.storagePath, context))) {
-                          setState(() => _model.isDataUploading = true);
+                          safeSetState(() => _model.isDataUploading = true);
                           var selectedUploadedFiles = <FFUploadedFile>[];
 
                           var downloadUrls = <String>[];
@@ -168,19 +168,19 @@ class _UpdatePhotoWidgetState extends State<UpdatePhotoWidget> {
                           if (selectedUploadedFiles.length ==
                                   selectedMedia.length &&
                               downloadUrls.length == selectedMedia.length) {
-                            setState(() {
+                            safeSetState(() {
                               _model.uploadedLocalFile =
                                   selectedUploadedFiles.first;
                               _model.uploadedFileUrl = downloadUrls.first;
                             });
                           } else {
-                            setState(() {});
+                            safeSetState(() {});
                             return;
                           }
                         }
 
                         FFAppState().photourl = _model.uploadedFileUrl;
-                        setState(() {});
+                        safeSetState(() {});
                       },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
@@ -237,11 +237,11 @@ class _UpdatePhotoWidgetState extends State<UpdatePhotoWidget> {
                                   ),
                                 );
                                 FFAppState().photourl = _model.uploadedFileUrl;
-                                setState(() {});
+                                safeSetState(() {});
 
                                 context.pushNamed('homeCopyCopy');
 
-                                if (_shouldSetState) setState(() {});
+                                if (_shouldSetState) safeSetState(() {});
                                 return;
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -258,7 +258,7 @@ class _UpdatePhotoWidgetState extends State<UpdatePhotoWidget> {
                                         FlutterFlowTheme.of(context).secondary,
                                   ),
                                 );
-                                if (_shouldSetState) setState(() {});
+                                if (_shouldSetState) safeSetState(() {});
                                 return;
                               }
                             } else {
@@ -276,11 +276,11 @@ class _UpdatePhotoWidgetState extends State<UpdatePhotoWidget> {
                                       FlutterFlowTheme.of(context).secondary,
                                 ),
                               );
-                              if (_shouldSetState) setState(() {});
+                              if (_shouldSetState) safeSetState(() {});
                               return;
                             }
 
-                            if (_shouldSetState) setState(() {});
+                            if (_shouldSetState) safeSetState(() {});
                           },
                           text: 'Subir foto ',
                           options: FFButtonOptions(

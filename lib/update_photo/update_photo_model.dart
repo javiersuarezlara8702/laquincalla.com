@@ -16,7 +16,6 @@ import 'package:provider/provider.dart';
 class UpdatePhotoModel extends FlutterFlowModel<UpdatePhotoWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));

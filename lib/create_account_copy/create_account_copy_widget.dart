@@ -66,7 +66,7 @@ class _CreateAccountCopyWidgetState extends State<CreateAccountCopyWidget> {
     _model.workplaceTextController ??= TextEditingController();
     _model.workplaceFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -570,7 +570,7 @@ class _CreateAccountCopyWidgetState extends State<CreateAccountCopyWidget> {
                                               filled: true,
                                               fillColor: Color(0xFFF1F4F8),
                                               suffixIcon: InkWell(
-                                                onTap: () => setState(
+                                                onTap: () => safeSetState(
                                                   () => _model
                                                           .passwordVisibility =
                                                       !_model
@@ -670,7 +670,7 @@ class _CreateAccountCopyWidgetState extends State<CreateAccountCopyWidget> {
                                               filled: true,
                                               fillColor: Color(0xFFF1F4F8),
                                               suffixIcon: InkWell(
-                                                onTap: () => setState(
+                                                onTap: () => safeSetState(
                                                   () => _model
                                                           .confirmpassVisibility =
                                                       !_model
@@ -1438,7 +1438,7 @@ class _CreateAccountCopyWidgetState extends State<CreateAccountCopyWidget> {
                                                                         _model
                                                                             .workplaceTextController
                                                                             .text;
-                                                                    setState(
+                                                                    safeSetState(
                                                                         () {});
                                                                     ScaffoldMessenger.of(
                                                                             context)

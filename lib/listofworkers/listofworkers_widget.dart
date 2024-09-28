@@ -35,7 +35,7 @@ class _ListofworkersWidgetState extends State<ListofworkersWidget> {
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -69,7 +69,7 @@ class _ListofworkersWidgetState extends State<ListofworkersWidget> {
                   size: 40.0,
                 ),
                 onPressed: () async {
-                  context.safePop();
+                  context.pushNamed('homeCopyCopy');
                 },
               ),
               title: Text(
@@ -242,7 +242,7 @@ class _ListofworkersWidgetState extends State<ListofworkersWidget> {
 
                               return RefreshIndicator(
                                 onRefresh: () async {
-                                  setState(
+                                  safeSetState(
                                       () => _model.apiRequestCompleter = null);
                                   await _model.waitForApiRequestCompleted();
                                 },
@@ -591,7 +591,7 @@ class _ListofworkersWidgetState extends State<ListofworkersWidget> {
                                                                   0.0,
                                                                   0.0),
                                                       child: Text(
-                                                        'Salario ideal :${getJsonField(
+                                                        'Salario ideal/día:${getJsonField(
                                                           workersItem,
                                                           r'''$.ideal_slary''',
                                                         ).toString()}',

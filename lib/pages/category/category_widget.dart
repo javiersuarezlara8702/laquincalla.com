@@ -34,7 +34,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
     super.initState();
     _model = createModel(context, () => CategoryModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -137,7 +137,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
 
                               return RefreshIndicator(
                                 onRefresh: () async {
-                                  setState(
+                                  safeSetState(
                                       () => _model.requestCompleter = null);
                                   await _model.waitForRequestCompleted();
                                 },

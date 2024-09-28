@@ -82,7 +82,7 @@ String? returnShippingPrice(String municipio) {
       return "500";
     case "Habana Vieja":
       return "550";
-    case "Santo suarez":
+    case "Santo Suarez":
       return "600";
     case "Cerro":
       return "500";
@@ -109,7 +109,7 @@ String? returnShippingPrice(String municipio) {
     case "Arrollo Naranjo ( vibora Park, Santa Amelia, Naranjito)":
       return "800";
     case "San Miguel del Padrón":
-      return "750";
+      return "900";
     case "Managua":
       return "1600";
     case "Las Guasimas":
@@ -132,7 +132,11 @@ String? returnShippingPrice(String municipio) {
       return "900";
     case "Habana del este ( lejania)":
       return "1400";
-    case "Recogida en el local":
+    case "Guanabacoa":
+      return "1200";
+    case "Regla":
+      return "1200";
+    case "Recogida en el Local":
       return "0";
     default:
   }

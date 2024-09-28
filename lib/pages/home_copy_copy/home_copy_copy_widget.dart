@@ -37,7 +37,7 @@ class _HomeCopyCopyWidgetState extends State<HomeCopyCopyWidget> {
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -138,7 +138,7 @@ class _HomeCopyCopyWidgetState extends State<HomeCopyCopyWidget> {
                                 'cliente') {
                               context.pushNamed('editProfile');
 
-                              if (_shouldSetState) setState(() {});
+                              if (_shouldSetState) safeSetState(() {});
                               return;
                             } else {
                               _model.apiResult4dx =
@@ -169,7 +169,7 @@ class _HomeCopyCopyWidgetState extends State<HomeCopyCopyWidget> {
                                               .secondary,
                                     ),
                                   );
-                                  if (_shouldSetState) setState(() {});
+                                  if (_shouldSetState) safeSetState(() {});
                                   return;
                                 }
                               } else {
@@ -204,11 +204,11 @@ class _HomeCopyCopyWidgetState extends State<HomeCopyCopyWidget> {
                                     FlutterFlowTheme.of(context).secondary,
                               ),
                             );
-                            if (_shouldSetState) setState(() {});
+                            if (_shouldSetState) safeSetState(() {});
                             return;
                           }
 
-                          if (_shouldSetState) setState(() {});
+                          if (_shouldSetState) safeSetState(() {});
                         },
                         child: Container(
                           width: double.infinity,
@@ -622,7 +622,7 @@ class _HomeCopyCopyWidgetState extends State<HomeCopyCopyWidget> {
 
                                       return RefreshIndicator(
                                         onRefresh: () async {
-                                          setState(() =>
+                                          safeSetState(() =>
                                               _model.requestCompleter = null);
                                           await _model
                                               .waitForRequestCompleted();

@@ -91,7 +91,7 @@ class _ProductWidgetState extends State<ProductWidget>
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -261,13 +261,13 @@ class _ProductWidgetState extends State<ProductWidget>
                                   ),
                                   count: _model.countControllerValue ??= 1,
                                   updateCount: (count) async {
-                                    setState(() =>
+                                    safeSetState(() =>
                                         _model.countControllerValue = count);
                                     if ((widget!.product!.quanty! > 0) &&
                                         (widget!.quanty != null)) {
                                       if (_model.countControllerValue! >
                                           widget!.quanty!) {
-                                        setState(() {
+                                        safeSetState(() {
                                           _model.countControllerValue =
                                               widget!.quanty!;
                                         });
@@ -315,7 +315,7 @@ class _ProductWidgetState extends State<ProductWidget>
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 25.0, 0.0),
                             child: Text(
-                              'Quedan ${widget!.product?.quanty?.toString()}',
+                              'Quedan / paq: ${widget!.product?.quanty?.toString()}',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -598,7 +598,7 @@ class _ProductWidgetState extends State<ProductWidget>
                                   functions.increaseBasePrice(
                                       widget!.product!.price!.toString(),
                                       _model.countControllerValue!.toString())!;
-                              setState(() {});
+                              safeSetState(() {});
                               if (!((FFAppState().lineItems.isNotEmpty) !=
                                   null)) {
                                 ScaffoldMessenger.of(context).showSnackBar(

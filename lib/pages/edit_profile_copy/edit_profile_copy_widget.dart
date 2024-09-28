@@ -71,7 +71,7 @@ class _EditProfileCopyWidgetState extends State<EditProfileCopyWidget> {
         TextEditingController(text: FFAppState().workplace);
     _model.workplaceFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -170,7 +170,8 @@ class _EditProfileCopyWidgetState extends State<EditProfileCopyWidget> {
                               if (selectedMedia != null &&
                                   selectedMedia.every((m) => validateFileFormat(
                                       m.storagePath, context))) {
-                                setState(() => _model.isDataUploading = true);
+                                safeSetState(
+                                    () => _model.isDataUploading = true);
                                 var selectedUploadedFiles = <FFUploadedFile>[];
 
                                 var downloadUrls = <String>[];
@@ -204,14 +205,14 @@ class _EditProfileCopyWidgetState extends State<EditProfileCopyWidget> {
                                         selectedMedia.length &&
                                     downloadUrls.length ==
                                         selectedMedia.length) {
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.uploadedLocalFile =
                                         selectedUploadedFiles.first;
                                     _model.uploadedFileUrl = downloadUrls.first;
                                   });
                                   showUploadMessage(context, 'Success!');
                                 } else {
-                                  setState(() {});
+                                  safeSetState(() {});
                                   showUploadMessage(
                                       context, 'Failed to upload data');
                                   return;
@@ -219,7 +220,7 @@ class _EditProfileCopyWidgetState extends State<EditProfileCopyWidget> {
                               }
 
                               FFAppState().photourl = _model.uploadedFileUrl;
-                              setState(() {});
+                              safeSetState(() {});
                             },
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
@@ -1071,7 +1072,7 @@ class _EditProfileCopyWidgetState extends State<EditProfileCopyWidget> {
                                       _model.salryTextController.text;
                                   FFAppState().workplace =
                                       _model.workplaceTextController.text;
-                                  setState(() {});
+                                  safeSetState(() {});
                                   _model.returnmatching1 =
                                       await BolsaDeEmpleoTable().update(
                                     data: {
@@ -1119,7 +1120,7 @@ class _EditProfileCopyWidgetState extends State<EditProfileCopyWidget> {
                                     ),
                                   );
 
-                                  setState(() {});
+                                  safeSetState(() {});
                                 },
                                 text: 'Guardar datos',
                                 options: FFButtonOptions(

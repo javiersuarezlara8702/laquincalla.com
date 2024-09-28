@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -28,7 +29,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     super.initState();
     _model = createModel(context, () => ProfileModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -188,7 +189,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   'cliente') {
                                 context.pushNamed('editProfile');
 
-                                if (_shouldSetState) setState(() {});
+                                if (_shouldSetState) safeSetState(() {});
                                 return;
                               } else {
                                 _model.apiResultcty =
@@ -219,7 +220,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 .secondary,
                                       ),
                                     );
-                                    if (_shouldSetState) setState(() {});
+                                    if (_shouldSetState) safeSetState(() {});
                                     return;
                                   }
                                 } else {
@@ -238,7 +239,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               .secondary,
                                     ),
                                   );
-                                  if (_shouldSetState) setState(() {});
+                                  if (_shouldSetState) safeSetState(() {});
                                   return;
                                 }
                               }
@@ -257,11 +258,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       FlutterFlowTheme.of(context).secondary,
                                 ),
                               );
-                              if (_shouldSetState) setState(() {});
+                              if (_shouldSetState) safeSetState(() {});
                               return;
                             }
 
-                            if (_shouldSetState) setState(() {});
+                            if (_shouldSetState) safeSetState(() {});
                           },
                           child: Container(
                             width: double.infinity,
@@ -419,7 +420,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           highlightColor: Colors.transparent,
                           onTap: () async {
                             await launchURL(
-                                'https://wa.me/+5354260383?text=Necesito%20asistencia%20con%20la%20aplicacion%20de%20La%20Esquina%20Charcuteria');
+                                'https://wa.me/+5354260383?text=Necesito%20asistencia%20con%20la%20aplicacion%20de%20Laquincalla.com');
                           },
                           child: Container(
                             width: double.infinity,
@@ -445,8 +446,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Icon(
-                                    Icons.mark_unread_chat_alt_outlined,
+                                  FaIcon(
+                                    FontAwesomeIcons.whatsappSquare,
                                     color:
                                         FlutterFlowTheme.of(context).secondary,
                                     size: 24.0,

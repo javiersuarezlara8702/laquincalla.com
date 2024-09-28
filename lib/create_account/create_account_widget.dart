@@ -44,7 +44,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
     _model.direccionTextController ??= TextEditingController();
     _model.direccionFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -426,7 +426,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                                 filled: true,
                                                 fillColor: Color(0xFFF1F4F8),
                                                 suffixIcon: InkWell(
-                                                  onTap: () => setState(
+                                                  onTap: () => safeSetState(
                                                     () => _model
                                                             .passwordVisibility =
                                                         !_model
@@ -536,7 +536,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                                 filled: true,
                                                 fillColor: Color(0xFFF1F4F8),
                                                 suffixIcon: InkWell(
-                                                  onTap: () => setState(
+                                                  onTap: () => safeSetState(
                                                     () => _model
                                                             .confirmpassVisibility =
                                                         !_model
@@ -859,7 +859,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                                             _model
                                                                 .emailAddressTextController
                                                                 .text;
-                                                        setState(() {});
+                                                        safeSetState(() {});
 
                                                         context.pushNamedAuth(
                                                             'homeCopyCopy',

@@ -16,7 +16,6 @@ import 'package:provider/provider.dart';
 class Onboarding02Model extends FlutterFlowModel<Onboarding02Widget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for PageView widget.
   PageController? pageViewController;
 

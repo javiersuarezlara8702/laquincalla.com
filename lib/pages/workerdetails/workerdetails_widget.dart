@@ -128,7 +128,7 @@ class _WorkerdetailsWidgetState extends State<WorkerdetailsWidget>
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

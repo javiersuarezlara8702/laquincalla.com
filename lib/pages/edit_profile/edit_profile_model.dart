@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for name widget.
   FocusNode? nameFocusNode1;

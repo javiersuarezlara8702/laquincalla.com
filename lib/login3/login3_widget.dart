@@ -34,7 +34,7 @@ class _Login3WidgetState extends State<Login3Widget> {
     _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -386,7 +386,7 @@ class _Login3WidgetState extends State<Login3Widget> {
                                                     fillColor:
                                                         Color(0xFFF1F4F8),
                                                     suffixIcon: InkWell(
-                                                      onTap: () => setState(
+                                                      onTap: () => safeSetState(
                                                         () => _model
                                                                 .passwordVisibility =
                                                             !_model
@@ -482,7 +482,7 @@ class _Login3WidgetState extends State<Login3Widget> {
 
                                                       FFAppState().emailuserid =
                                                           currentUserEmail;
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                       _model.apiResult0sw =
                                                           await SerachuseridCall
                                                               .call(
@@ -501,7 +501,7 @@ class _Login3WidgetState extends State<Login3Widget> {
                                                               ''),
                                                           r'''$[:].user_id''',
                                                         ).toString();
-                                                        setState(() {});
+                                                        safeSetState(() {});
                                                         if (currentUserUid ==
                                                             FFAppState()
                                                                 .userid) {
@@ -526,14 +526,14 @@ class _Login3WidgetState extends State<Login3Widget> {
                                                                 ''),
                                                             r'''$[:].phonenumberr''',
                                                           ).toString();
-                                                          setState(() {});
+                                                          safeSetState(() {});
 
                                                           context.pushNamedAuth(
                                                               'homeCopyCopy',
                                                               context.mounted);
 
                                                           if (_shouldSetState)
-                                                            setState(() {});
+                                                            safeSetState(() {});
                                                           return;
                                                         } else {
                                                           _model.apiResult0ej =
@@ -557,7 +557,7 @@ class _Login3WidgetState extends State<Login3Widget> {
                                                                   ''),
                                                               r'''$[:].user_id''',
                                                             ).toString();
-                                                            setState(() {});
+                                                            safeSetState(() {});
                                                             if (currentUserUid ==
                                                                 FFAppState()
                                                                     .userid) {
@@ -648,7 +648,8 @@ class _Login3WidgetState extends State<Login3Widget> {
                                                                     ''),
                                                                 r'''$[:].work_place''',
                                                               ).toString();
-                                                              setState(() {});
+                                                              safeSetState(
+                                                                  () {});
 
                                                               context.pushNamedAuth(
                                                                   'homeCopyCopy',
@@ -678,7 +679,8 @@ class _Login3WidgetState extends State<Login3Widget> {
                                                                 ),
                                                               );
                                                               if (_shouldSetState)
-                                                                setState(() {});
+                                                                safeSetState(
+                                                                    () {});
                                                               return;
                                                             }
                                                           } else {
@@ -705,7 +707,8 @@ class _Login3WidgetState extends State<Login3Widget> {
                                                               ),
                                                             );
                                                             if (_shouldSetState)
-                                                              setState(() {});
+                                                              safeSetState(
+                                                                  () {});
                                                             return;
                                                           }
                                                         }
@@ -732,12 +735,12 @@ class _Login3WidgetState extends State<Login3Widget> {
                                                           ),
                                                         );
                                                         if (_shouldSetState)
-                                                          setState(() {});
+                                                          safeSetState(() {});
                                                         return;
                                                       }
 
                                                       if (_shouldSetState)
-                                                        setState(() {});
+                                                        safeSetState(() {});
                                                     },
                                                     text: 'Sign In',
                                                     options: FFButtonOptions(

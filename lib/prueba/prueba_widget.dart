@@ -34,7 +34,7 @@ class _PruebaWidgetState extends State<PruebaWidget> {
     super.initState();
     _model = createModel(context, () => PruebaModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -109,7 +109,7 @@ class _PruebaWidgetState extends State<PruebaWidget> {
                         if (selectedMedia != null &&
                             selectedMedia.every((m) =>
                                 validateFileFormat(m.storagePath, context))) {
-                          setState(() => _model.isDataUploading = true);
+                          safeSetState(() => _model.isDataUploading = true);
                           var selectedUploadedFiles = <FFUploadedFile>[];
 
                           var downloadUrls = <String>[];
@@ -140,14 +140,14 @@ class _PruebaWidgetState extends State<PruebaWidget> {
                           if (selectedUploadedFiles.length ==
                                   selectedMedia.length &&
                               downloadUrls.length == selectedMedia.length) {
-                            setState(() {
+                            safeSetState(() {
                               _model.uploadedLocalFile =
                                   selectedUploadedFiles.first;
                               _model.uploadedFileUrl = downloadUrls.first;
                             });
                             showUploadMessage(context, 'Success!');
                           } else {
-                            setState(() {});
+                            safeSetState(() {});
                             showUploadMessage(context, 'Failed to upload data');
                             return;
                           }
@@ -203,7 +203,7 @@ class _PruebaWidgetState extends State<PruebaWidget> {
                                   FlutterFlowTheme.of(context).secondary,
                             ),
                           );
-                          if (_shouldSetState) setState(() {});
+                          if (_shouldSetState) safeSetState(() {});
                           return;
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -219,7 +219,7 @@ class _PruebaWidgetState extends State<PruebaWidget> {
                                   FlutterFlowTheme.of(context).secondary,
                             ),
                           );
-                          if (_shouldSetState) setState(() {});
+                          if (_shouldSetState) safeSetState(() {});
                           return;
                         }
                       } else {
@@ -239,11 +239,11 @@ class _PruebaWidgetState extends State<PruebaWidget> {
                             );
                           },
                         );
-                        if (_shouldSetState) setState(() {});
+                        if (_shouldSetState) safeSetState(() {});
                         return;
                       }
 
-                      if (_shouldSetState) setState(() {});
+                      if (_shouldSetState) safeSetState(() {});
                     },
                     text: 'Button',
                     options: FFButtonOptions(

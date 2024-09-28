@@ -89,7 +89,7 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -265,7 +265,7 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
                                   ),
                                   count: _model.countControllerValue ??= 1,
                                   updateCount: (count) async {
-                                    setState(() =>
+                                    safeSetState(() =>
                                         _model.countControllerValue = count);
                                     if ((getJsonField(
                                               widget!.product,
@@ -282,7 +282,7 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
                                             widget!.product,
                                             r'''$.quanty''',
                                           )) {
-                                        setState(() {
+                                        safeSetState(() {
                                           _model.countControllerValue =
                                               getJsonField(
                                             widget!.product,
@@ -634,7 +634,7 @@ class _ProductCopyWidgetState extends State<ProductCopyWidget>
                                         r'''$.price''',
                                       ).toString(),
                                       _model.countControllerValue!.toString());
-                              setState(() {});
+                              safeSetState(() {});
                               if (!((FFAppState().lineItems.isNotEmpty) !=
                                   null)) {
                                 ScaffoldMessenger.of(context).showSnackBar(

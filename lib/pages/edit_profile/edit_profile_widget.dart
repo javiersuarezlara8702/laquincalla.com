@@ -43,7 +43,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
         TextEditingController(text: FFAppState().phone);
     _model.phoneFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -429,7 +429,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   _model.phoneTextController.text;
                               FFAppState().lastName =
                                   _model.nameTextController2.text;
-                              setState(() {});
+                              safeSetState(() {});
                               _model.returnmatching1 = await UserTable().update(
                                 data: {
                                   'name': _model.nameTextController1.text,
@@ -461,7 +461,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 ),
                               );
 
-                              setState(() {});
+                              safeSetState(() {});
                             },
                             text: 'Guardar datos',
                             options: FFButtonOptions(
